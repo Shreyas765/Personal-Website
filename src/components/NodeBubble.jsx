@@ -17,7 +17,7 @@ const NodeBubble = ({ section, onClick }) => {
       onClick={handleClick}
       whileHover={{ 
         scale: 1.1,
-        boxShadow: "0 25px 50px -12px rgba(16, 185, 129, 0.25)"
+        boxShadow: "0 25px 50px -12px rgba(220, 38, 38, 0.25)"
       }}
       whileTap={{ 
         scale: 1.3,
@@ -35,18 +35,18 @@ const NodeBubble = ({ section, onClick }) => {
       aria-controls={`panel-${section.id}`}
       aria-expanded="false"
       style={{
-        background: 'linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%)',
-        border: '2px solid rgba(16, 185, 129, 0.3)'
+        background: 'linear-gradient(135deg, #7f1d1d 0%, #dc2626 50%, #ef4444 100%)',
+        border: '2px solid rgba(220, 38, 38, 0.5)'
       }}
     >
       {/* Subtle glow effect on hover */}
-      <div className="absolute inset-0 rounded-full bg-emerald-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm" />
+      <div className="absolute inset-0 rounded-full bg-red-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm" />
       
       {/* Enhanced glow effect on click */}
       <AnimatePresence>
         {isClicked && (
           <motion.div
-            className="absolute inset-0 rounded-full bg-emerald-600/30 blur-md"
+            className="absolute inset-0 rounded-full bg-red-600/30 blur-md"
             initial={{ 
               scale: 0.8,
               opacity: 0
@@ -71,7 +71,7 @@ const NodeBubble = ({ section, onClick }) => {
       <AnimatePresence>
         {isClicked && (
           <motion.div
-            className="absolute inset-0 rounded-full border-2 border-emerald-600"
+            className="absolute inset-0 rounded-full border-2 border-red-600"
             initial={{ 
               scale: 0.8,
               opacity: 1
@@ -94,7 +94,7 @@ const NodeBubble = ({ section, onClick }) => {
       
       {/* Content */}
       <div className="relative z-10">
-        <h3 className="text-sm font-semibold text-white mb-1 group-hover:text-emerald-400 transition-colors duration-200 drop-shadow-sm">
+        <h3 className="text-sm font-semibold text-white mb-1 group-hover:text-red-400 transition-colors duration-200 drop-shadow-sm">
           {section.title}
         </h3>
         <p className="text-xs text-white/80 group-hover:text-white/90 transition-colors duration-200 drop-shadow-sm">
