@@ -33,8 +33,11 @@ export default {
           '0%': { boxShadow: '0 0 20px rgba(16, 185, 129, 0.3)' },
           '100%': { boxShadow: '0 0 30px rgba(16, 185, 129, 0.6)' },
         }
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
       }
     },
   },
   plugins: [],
-} 
+}
