@@ -26,95 +26,77 @@ const HubScene = ({ onSectionOpen, score, hasWon }) => {
       </div>
 
       {/* Enhanced Sponsor Board - Professional Roles with Realistic Sections */}
-      <div className="absolute bottom-20 left-0 w-full z-1 overflow-hidden">
+      <div className="absolute bottom-36 left-0 w-full z-1 overflow-hidden">
         <motion.div
-          className="flex items-center py-6 shadow-2xl border-t-4 border-b-4 border-blue-300"
+          className="flex items-center h-160 shadow-2xl"
           style={{ 
-            width: '200%',
-            background: 'linear-gradient(135deg, #1e3a8a 0%, #3b82f6 25%, #1e40af 50%, #2563eb 75%, #1e3a8a 100%)'
+            width: '200%'
           }}
           animate={{
-            x: [-1600, 0]
+            x: [0, -800]
           }}
           transition={{
             duration: 20,
             repeat: Infinity,
-            ease: "linear"
+            ease: "linear",
+            repeatType: "loop"
           }}
         >
-          <div className="flex items-center space-x-8 whitespace-nowrap min-w-full">
-            {/* Sponsor Section 1 */}
-            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-6 py-4 mx-2 shadow-lg">
-              <div className="flex items-center space-x-3">
-                <div className="w-4 h-4 bg-emerald-400 rounded-full animate-pulse shadow-lg"></div>
-                <span className="text-white font-bold text-2xl tracking-wide drop-shadow-lg">SOFTWARE DEVELOPER</span>
-              </div>
-            </div>
-            
-            {/* Sponsor Section 2 */}
-            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-6 py-4 mx-2 shadow-lg">
-              <div className="flex items-center space-x-3">
-                <div className="w-4 h-4 bg-yellow-400 rounded-full animate-pulse shadow-lg"></div>
-                <span className="text-white font-bold text-2xl tracking-wide drop-shadow-lg">SOFTWARE RESEARCHER</span>
-              </div>
-            </div>
-            
-            {/* Sponsor Section 3 */}
-            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-6 py-4 mx-2 shadow-lg">
-              <div className="flex items-center space-x-3">
-                <div className="w-4 h-4 bg-red-400 rounded-full animate-pulse shadow-lg"></div>
-                <span className="text-white font-bold text-2xl tracking-wide drop-shadow-lg">SOFTWARE DESIGNER</span>
-              </div>
-            </div>
-            
-            {/* Sponsor Section 4 (repeat for seamless loop) */}
-            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-6 py-4 mx-2 shadow-lg">
-              <div className="flex items-center space-x-3">
-                <div className="w-4 h-4 bg-emerald-400 rounded-full animate-pulse shadow-lg"></div>
-                <span className="text-white font-bold text-2xl tracking-wide drop-shadow-lg">SOFTWARE DEVELOPER</span>
-              </div>
-            </div>
-            
-            {/* Sponsor Section 5 */}
-            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-6 py-4 mx-2 shadow-lg">
-              <div className="flex items-center space-x-3">
-                <div className="w-4 h-4 bg-yellow-400 rounded-full animate-pulse shadow-lg"></div>
-                <span className="text-white font-bold text-2xl tracking-wide drop-shadow-lg">SOFTWARE RESEARCHER</span>
-              </div>
-            </div>
-            
-            {/* Sponsor Section 6 */}
-            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-6 py-4 mx-2 shadow-lg">
-              <div className="flex items-center space-x-3">
-                <div className="w-4 h-4 bg-red-400 rounded-full animate-pulse shadow-lg"></div>
-                <span className="text-white font-bold text-2xl tracking-wide drop-shadow-lg">SOFTWARE DESIGNER</span>
-              </div>
-            </div>
-            
-            {/* Sponsor Section 7 (third repeat for seamless loop) */}
-            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-6 py-4 mx-2 shadow-lg">
-              <div className="flex items-center space-x-3">
-                <div className="w-4 h-4 bg-emerald-400 rounded-full animate-pulse shadow-lg"></div>
-                <span className="text-white font-bold text-2xl tracking-wide drop-shadow-lg">SOFTWARE DEVELOPER</span>
-              </div>
-            </div>
-            
-            {/* Sponsor Section 8 */}
-            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-6 py-4 mx-2 shadow-lg">
-              <div className="flex items-center space-x-3">
-                <div className="w-4 h-4 bg-yellow-400 rounded-full animate-pulse shadow-lg"></div>
-                <span className="text-white font-bold text-2xl tracking-wide drop-shadow-lg">SOFTWARE RESEARCHER</span>
-              </div>
-            </div>
-            
-            {/* Sponsor Section 9 */}
-            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-6 py-4 mx-2 shadow-lg">
-              <div className="flex items-center space-x-3">
-                <div className="w-4 h-4 bg-red-400 rounded-full animate-pulse shadow-lg"></div>
-                <span className="text-white font-bold text-2xl tracking-wide drop-shadow-lg">SOFTWARE DESIGNER</span>
-              </div>
-            </div>
+          {/* First set of sponsor sections */}
+          <div className="flex items-center whitespace-nowrap">
+             {/* Sponsor Section 1 - Red */}
+             <div className="flex flex-col items-center justify-center px-12 h-full bg-red-600" style={{ minWidth: '200px' }}>
+               <span className="text-white font-bold text-3xl tracking-wide drop-shadow-lg">SOFTWARE</span>
+               <span className="text-white font-bold text-3xl tracking-wide drop-shadow-lg">DEVELOPER</span>
+             </div>
+             
+             {/* Sponsor Section 2 - Blue */}
+             <div className="flex flex-col items-center justify-center px-12 h-full bg-blue-600" style={{ minWidth: '200px' }}>
+               <span className="text-white font-bold text-3xl tracking-wide drop-shadow-lg">SOFTWARE</span>
+               <span className="text-white font-bold text-3xl tracking-wide drop-shadow-lg">RESEARCHER</span>
+             </div>
+             
+             {/* Sponsor Section 3 - Light Green */}
+             <div className="flex flex-col items-center justify-center px-12 h-full bg-green-400" style={{ minWidth: '200px' }}>
+               <span className="text-black font-bold text-3xl tracking-wide drop-shadow-lg">SOFTWARE</span>
+               <span className="text-black font-bold text-3xl tracking-wide drop-shadow-lg">DESIGNER</span>
+             </div>
+             
+             {/* Sponsor Section 4 - Yellow */}
+             <div className="flex flex-col items-center justify-center px-12 h-full bg-yellow-500" style={{ minWidth: '200px' }}>
+               <span className="text-black font-bold text-3xl tracking-wide drop-shadow-lg">SOFTWARE</span>
+               <span className="text-black font-bold text-3xl tracking-wide drop-shadow-lg">ENGINEER</span>
+             </div>
           </div>
+          
+          {/* Duplicate set 1 for seamless loop */}
+          <div className="flex items-center whitespace-nowrap">
+             {/* Sponsor Section 1 - Red (duplicate) */}
+             <div className="flex flex-col items-center justify-center px-12 h-full bg-red-600" style={{ minWidth: '200px' }}>
+               <span className="text-white font-bold text-3xl tracking-wide drop-shadow-lg">SOFTWARE</span>
+               <span className="text-white font-bold text-3xl tracking-wide drop-shadow-lg">DEVELOPER</span>
+             </div>
+             
+             {/* Sponsor Section 2 - Blue (duplicate) */}
+             <div className="flex flex-col items-center justify-center px-12 h-full bg-blue-600" style={{ minWidth: '200px' }}>
+               <span className="text-white font-bold text-3xl tracking-wide drop-shadow-lg">SOFTWARE</span>
+               <span className="text-white font-bold text-3xl tracking-wide drop-shadow-lg">RESEARCHER</span>
+             </div>
+             
+             {/* Sponsor Section 3 - Light Green (duplicate) */}
+             <div className="flex flex-col items-center justify-center px-12 h-full bg-green-400" style={{ minWidth: '200px' }}>
+               <span className="text-black font-bold text-3xl tracking-wide drop-shadow-lg">SOFTWARE</span>
+               <span className="text-black font-bold text-3xl tracking-wide drop-shadow-lg">DESIGNER</span>
+             </div>
+             
+             {/* Sponsor Section 4 - Yellow (duplicate) */}
+             <div className="flex flex-col items-center justify-center px-12 h-full bg-yellow-500" style={{ minWidth: '200px' }}>
+               <span className="text-black font-bold text-3xl tracking-wide drop-shadow-lg">SOFTWARE</span>
+               <span className="text-black font-bold text-3xl tracking-wide drop-shadow-lg">ENGINEER</span>
+             </div>
+          </div>
+
+
         </motion.div>
       </div>
 
@@ -184,7 +166,7 @@ const HubScene = ({ onSectionOpen, score, hasWon }) => {
 
       {/* Soccer Goal Background - Behind the Grass */}
       {/* Goal frame - main structure */}
-      <div className="absolute bottom-1/3 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-2/3 h-3/4 z-5">
+      <div className="absolute bottom-1/3 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-2/3 h-3/4 z-1">
         {/* Left post */}
         <div className="absolute left-0 top-0 w-4 h-full bg-white shadow-lg" style={{
           background: 'linear-gradient(to right, #ffffff, #f8f9fa)',
@@ -380,6 +362,25 @@ const HubScene = ({ onSectionOpen, score, hasWon }) => {
             repeat: Infinity,
             ease: "easeInOut",
             delay: 3.5
+          }}
+        />
+
+        {/* Grass layer 9 - extra coverage for black spots */}
+        <motion.div 
+          className="absolute bottom-0 left-0 w-full h-72 -z-10"
+          style={{
+            background: 'linear-gradient(to top,rgb(84, 153, 84),rgb(88, 153, 88))',
+            clipPath: 'polygon(0% 100%, 0% 50%, 20% 49%, 100% 51%, 60% 49%, 100% 51%, 100% 100%, 100% 100%)'
+          }}
+          animate={{
+            x: [0, 0.05, -0.05, 0],
+            scaleX: [1, 1.0003, 0.9997, 1]
+          }}
+          transition={{
+            duration: 1.5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 4
           }}
         />
         
