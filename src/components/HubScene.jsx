@@ -7,6 +7,7 @@ import { sections } from '../data/sections'
 
 const HubScene = ({ onSectionOpen, score, hasWon }) => {
   const [isFirstVisit, setIsFirstVisit] = useState(false)
+  const [showWelcomePopup, setShowWelcomePopup] = useState(true)
   const [ballAnimation, setBallAnimation] = useState(null) // { targetId, targetPosition }
   const [isAnimating, setIsAnimating] = useState(false)
 
@@ -40,6 +41,17 @@ const HubScene = ({ onSectionOpen, score, hasWon }) => {
 
   const [stars] = useState(() => generateStars(150))
   const [shootingStars] = useState(() => generateShootingStars(5))
+
+  // Auto-dismiss welcome popup after 5 seconds
+  useEffect(() => {
+    if (showWelcomePopup) {
+      const timer = setTimeout(() => {
+        setShowWelcomePopup(false)
+      }, 5000) // 5 seconds
+
+      return () => clearTimeout(timer)
+    }
+  }, [showWelcomePopup])
 
   // Calculate positions for the four nodes in corners
   const getNodePosition = (index, total = 4) => {
@@ -239,9 +251,15 @@ const HubScene = ({ onSectionOpen, score, hasWon }) => {
               boxShadow: '0 12px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(16, 185, 129, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
             }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => {
-              // Add contact logic here (email, contact form, etc.)
-              console.log('Contact clicked');
+            onClick={async () => {
+              try {
+                // Copy email to clipboard
+                await navigator.clipboard.writeText('varisa3@gatech.edu');
+              } catch (err) {
+                console.error('Failed to copy email: ', err);
+              }
+              // Always open email client regardless of clipboard success
+              window.open('mailto:varisa3@gatech.edu', '_blank');
             }}
           >
             <motion.div
@@ -323,10 +341,10 @@ const HubScene = ({ onSectionOpen, score, hasWon }) => {
         </motion.div>
       </div>
 
-      {/* Enhanced Sponsor Board - Professional Roles with Realistic Sections */}
+      {/* Futuristic Sponsor Board - Professional Roles */}
       <div className="absolute bottom-60 left-0 w-full z-10 overflow-hidden">
         <motion.div
-          className="flex items-center h-24 shadow-2xl"
+          className="flex items-center h-28 relative"
           style={{ 
             width: 'max-content'
           }}
@@ -340,26 +358,145 @@ const HubScene = ({ onSectionOpen, score, hasWon }) => {
             repeatType: "loop"
           }}
         >
-          {/* Sponsor sections with enhanced styling */}
+          {/* Sponsor sections with futuristic glass-morphism styling */}
           {Array.from({ length: 20 }, (_, i) => [
-            { title: 'SOFTWARE', subtitle: 'DESIGNER', bgColor: 'bg-gradient-to-br from-red-500 to-red-700', textColor: 'text-white', shadow: 'shadow-red-500/30' },
-            { title: 'AI/ML', subtitle: 'RESEARCHER', bgColor: 'bg-gradient-to-br from-blue-500 to-blue-700', textColor: 'text-white', shadow: 'shadow-blue-500/30' },
-            { title: 'SOFTWARE', subtitle: 'ENGINEER', bgColor: 'bg-gradient-to-br from-yellow-500 to-yellow-600', textColor: 'text-black', shadow: 'shadow-yellow-500/30' }
+            { 
+              title: 'SOFTWARE', 
+              subtitle: 'DESIGNER', 
+              accentColor: 'cyan',
+              gradientFrom: 'from-cyan-500/20',
+              gradientTo: 'to-blue-500/20',
+              borderColor: 'border-cyan-400/40',
+              glowColor: 'shadow-cyan-500/30',
+              textAccent: 'text-cyan-400'
+            },
+            { 
+              title: 'AI/ML', 
+              subtitle: 'RESEARCHER', 
+              accentColor: 'purple',
+              gradientFrom: 'from-purple-500/20',
+              gradientTo: 'to-violet-500/20',
+              borderColor: 'border-purple-400/40',
+              glowColor: 'shadow-purple-500/30',
+              textAccent: 'text-purple-400'
+            },
+            { 
+              title: 'SOFTWARE', 
+              subtitle: 'ENGINEER', 
+              accentColor: 'emerald',
+              gradientFrom: 'from-emerald-500/20',
+              gradientTo: 'to-green-500/20',
+              borderColor: 'border-emerald-400/40',
+              glowColor: 'shadow-emerald-500/30',
+              textAccent: 'text-emerald-400'
+            }
           ]).flat().map((sponsor, index) => (
-            <div 
+            <motion.div 
               key={index}
-              className={`flex flex-col items-center justify-center px-8 h-full ${sponsor.bgColor} ${sponsor.shadow} border-r-2 border-white/20`} 
-              style={{ minWidth: '280px' }}
+                             className={`relative flex flex-col items-center justify-center px-8 h-full bg-gradient-to-br from-slate-900/80 via-slate-800/60 to-slate-900/80 backdrop-blur-lg border-r border-white/10 overflow-hidden`}
+               style={{ 
+                 minWidth: '280px',
+                boxShadow: `0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.1)`
+              }}
+              whileHover={{
+                scale: 1.02,
+                boxShadow: `0 12px 40px rgba(0, 0, 0, 0.4), 0 0 20px ${sponsor.accentColor === 'cyan' ? 'rgba(34, 211, 238, 0.3)' : sponsor.accentColor === 'purple' ? 'rgba(147, 51, 234, 0.3)' : 'rgba(16, 185, 129, 0.3)'}, inset 0 1px 0 rgba(255, 255, 255, 0.2)`
+              }}
+              transition={{ duration: 0.3 }}
             >
-              <span className={`${sponsor.textColor} font-black text-2xl tracking-wider drop-shadow-2xl mb-1`}>
-                {sponsor.title}
-              </span>
-              <span className={`${sponsor.textColor} font-black text-2xl tracking-wider drop-shadow-2xl`}>
-                {sponsor.subtitle}
-              </span>
-            </div>
+              {/* Animated background glow */}
+              <motion.div 
+                className={`absolute inset-0 bg-gradient-to-br ${sponsor.gradientFrom} ${sponsor.gradientTo} opacity-0`}
+                animate={{
+                  opacity: [0, 0.6, 0]
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: index * 0.2
+                }}
+              />
+              
+              {/* Animated border accent */}
+              <motion.div 
+                className={`absolute inset-0 border ${sponsor.borderColor} rounded-sm`}
+                animate={{
+                  borderOpacity: [0.2, 0.8, 0.2]
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: index * 0.1
+                }}
+              />
+              
+              {/* Content */}
+              <div className="relative z-10 flex flex-col items-center">
+                                 <motion.span 
+                   className={`${sponsor.textAccent} font-black text-2xl tracking-[0.15em] mb-2 relative`}
+                  style={{
+                    textShadow: `0 0 10px ${sponsor.accentColor === 'cyan' ? 'rgba(34, 211, 238, 0.5)' : sponsor.accentColor === 'purple' ? 'rgba(147, 51, 234, 0.5)' : 'rgba(16, 185, 129, 0.5)'}, 0 2px 4px rgba(0, 0, 0, 0.8)`
+                  }}
+                  animate={{
+                    textShadow: [
+                      `0 0 5px ${sponsor.accentColor === 'cyan' ? 'rgba(34, 211, 238, 0.3)' : sponsor.accentColor === 'purple' ? 'rgba(147, 51, 234, 0.3)' : 'rgba(16, 185, 129, 0.3)'}, 0 2px 4px rgba(0, 0, 0, 0.8)`,
+                      `0 0 15px ${sponsor.accentColor === 'cyan' ? 'rgba(34, 211, 238, 0.8)' : sponsor.accentColor === 'purple' ? 'rgba(147, 51, 234, 0.8)' : 'rgba(16, 185, 129, 0.8)'}, 0 2px 4px rgba(0, 0, 0, 0.8)`,
+                      `0 0 5px ${sponsor.accentColor === 'cyan' ? 'rgba(34, 211, 238, 0.3)' : sponsor.accentColor === 'purple' ? 'rgba(147, 51, 234, 0.3)' : 'rgba(16, 185, 129, 0.3)'}, 0 2px 4px rgba(0, 0, 0, 0.8)`
+                    ]
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: index * 0.15
+                  }}
+                >
+                  {sponsor.title}
+                </motion.span>
+                                 <span className="text-white/90 font-bold text-xl tracking-[0.1em] relative" style={{
+                  textShadow: '0 2px 8px rgba(0, 0, 0, 0.8)'
+                }}>
+                  {sponsor.subtitle}
+                </span>
+              </div>
+              
+              {/* Subtle particle effect */}
+              <motion.div
+                className="absolute top-2 right-2 w-1 h-1 bg-white/40 rounded-full"
+                animate={{
+                  scale: [0, 1, 0],
+                  opacity: [0, 1, 0]
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  delay: index * 0.3
+                }}
+              />
+              <motion.div
+                className="absolute bottom-2 left-2 w-1 h-1 bg-white/30 rounded-full"
+                animate={{
+                  scale: [0, 1, 0],
+                  opacity: [0, 1, 0]
+                }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  delay: index * 0.4
+                }}
+              />
+            </motion.div>
           ))}
         </motion.div>
+        
+        {/* Additional futuristic overlay effects */}
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-500/5 to-transparent pointer-events-none" 
+             style={{
+               background: 'linear-gradient(90deg, transparent 0%, rgba(34, 211, 238, 0.05) 25%, rgba(147, 51, 234, 0.05) 50%, rgba(16, 185, 129, 0.05) 75%, transparent 100%)'
+             }}
+        />
       </div>
 
       {/* Center Profile Picture - About Me */}
@@ -573,6 +710,114 @@ const HubScene = ({ onSectionOpen, score, hasWon }) => {
           <button className="px-6 py-3 bg-emerald-500 hover:bg-emerald-600 rounded-full text-white font-semibold shadow-lg transition-all duration-200 hover:scale-105">
             View Résumé
           </button>
+        </motion.div>
+      )}
+
+      {/* Welcome Notification */}
+      {showWelcomePopup && (
+        <motion.div
+          className="fixed top-4 right-4 z-50 max-w-xs cursor-pointer"
+          initial={{ 
+            opacity: 0,
+            x: 100,
+            scale: 0.9
+          }}
+          animate={{ 
+            opacity: 1,
+            x: 0,
+            scale: 1
+          }}
+          exit={{
+            opacity: 0,
+            x: 100,
+            scale: 0.9
+          }}
+          transition={{ 
+            duration: 0.4,
+            ease: "easeOut"
+          }}
+          onClick={() => setShowWelcomePopup(false)}
+        >
+          <motion.div
+            className="relative bg-gradient-to-br from-slate-900/95 via-slate-800/95 to-slate-900/95 backdrop-blur-lg border border-cyan-400/50 rounded-xl p-4 shadow-2xl"
+            style={{
+              boxShadow: '0 10px 25px rgba(0, 0, 0, 0.4), 0 0 15px rgba(34, 211, 238, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+            }}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2 }}
+          >
+            {/* Animated border glow */}
+            <motion.div 
+              className="absolute inset-0 rounded-xl border border-cyan-400/30"
+              animate={{
+                boxShadow: [
+                  '0 0 10px rgba(34, 211, 238, 0.2)',
+                  '0 0 20px rgba(34, 211, 238, 0.4)',
+                  '0 0 10px rgba(34, 211, 238, 0.2)'
+                ]
+              }}
+              transition={{ 
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+            
+            {/* Close button */}
+            <button
+              className="absolute top-2 right-2 w-6 h-6 flex items-center justify-center text-slate-400 hover:text-white transition-colors duration-200"
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowWelcomePopup(false);
+              }}
+            >
+              ×
+            </button>
+            
+            {/* Content */}
+            <div className="relative z-10 pr-6">
+              {/* Title */}
+              <motion.h3 
+                className="text-lg font-black text-white tracking-wide mb-3"
+                style={{
+                  textShadow: '0 0 8px rgba(34, 211, 238, 0.5)'
+                }}
+              >
+                Shoot at the targets!
+              </motion.h3>
+              
+              {/* Description */}
+              <p className="text-slate-300 text-sm leading-relaxed">
+                Click on the profile picture or section bubbles to explore my portfolio
+              </p>
+            </div>
+            
+            {/* Small floating particles */}
+            {[...Array(3)].map((_, i) => (
+              <motion.div
+                key={i}
+                className={`absolute w-1 h-1 rounded-full ${
+                  i % 3 === 0 ? 'bg-cyan-400/60' : 
+                  i % 3 === 1 ? 'bg-blue-400/60' : 'bg-purple-400/60'
+                }`}
+                style={{
+                  top: `${30 + Math.random() * 40}%`,
+                  left: `${15 + Math.random() * 70}%`,
+                }}
+                animate={{
+                  y: [0, -5, 0],
+                  opacity: [0.3, 0.8, 0.3],
+                  scale: [0.5, 1, 0.5]
+                }}
+                transition={{
+                  duration: 1.5 + Math.random() * 0.5,
+                  repeat: Infinity,
+                  delay: i * 0.3,
+                  ease: "easeInOut"
+                }}
+              />
+            ))}
+          </motion.div>
         </motion.div>
       )}
       

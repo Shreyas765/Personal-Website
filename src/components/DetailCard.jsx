@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, ArrowRight } from 'lucide-react'
+import { X, Sparkles } from 'lucide-react'
 
 const DetailCard = ({ section, onClose }) => {
   // Handle ESC key to close
@@ -32,16 +32,22 @@ const DetailCard = ({ section, onClose }) => {
         exit={{ opacity: 0 }}
         onClick={onClose}
       >
-        {/* Backdrop */}
-        <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
+        {/* Enhanced Backdrop */}
+        <div className="absolute inset-0 bg-black/70 backdrop-blur-md" />
         
         {/* Card */}
         <motion.div
-          className="relative w-[90vw] h-[90vh] rounded-2xl shadow-2xl bg-slate-900/95 border border-white/10 overflow-hidden flex flex-col"
+          className="relative w-[90vw] h-[90vh] rounded-3xl overflow-hidden flex flex-col"
+          style={{
+            background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.95) 50%, rgba(15, 23, 42, 0.95) 100%)',
+            backdropFilter: 'blur(20px)',
+            border: '1px solid rgba(34, 211, 238, 0.3)',
+            boxShadow: '0 25px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(34, 211, 238, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+          }}
           initial={{ 
             scale: 0.3, 
             opacity: 0,
-            y: 0,
+            y: 50,
             rotateX: 15
           }}
           animate={{ 
@@ -53,11 +59,11 @@ const DetailCard = ({ section, onClose }) => {
           exit={{ 
             scale: 0.3, 
             opacity: 0,
-            y: 0,
+            y: 50,
             rotateX: 15
           }}
           transition={{ 
-            duration: 0.4,
+            duration: 0.5,
             ease: "easeOut"
           }}
           onClick={(e) => e.stopPropagation()}
@@ -65,58 +71,170 @@ const DetailCard = ({ section, onClose }) => {
           aria-modal="true"
           aria-labelledby={`${section.id}-title`}
         >
+          {/* Animated Border Glow */}
+          <motion.div 
+            className="absolute inset-0 rounded-3xl border border-cyan-400/40"
+            animate={{
+              boxShadow: [
+                '0 0 20px rgba(34, 211, 238, 0.3)',
+                '0 0 40px rgba(34, 211, 238, 0.6)',
+                '0 0 20px rgba(34, 211, 238, 0.3)'
+              ]
+            }}
+            transition={{ 
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+
+          {/* Floating Background Particles */}
+          {[...Array(15)].map((_, i) => (
+            <motion.div
+              key={i}
+              className={`absolute w-1 h-1 rounded-full ${
+                i % 4 === 0 ? 'bg-cyan-400/40' : 
+                i % 4 === 1 ? 'bg-blue-400/40' : 
+                i % 4 === 2 ? 'bg-purple-400/40' : 'bg-emerald-400/40'
+              }`}
+              style={{
+                top: `${10 + Math.random() * 80}%`,
+                left: `${10 + Math.random() * 80}%`,
+              }}
+              animate={{
+                y: [0, -20, 0],
+                opacity: [0.2, 0.8, 0.2],
+                scale: [0.5, 1.2, 0.5]
+              }}
+              transition={{
+                duration: 3 + Math.random() * 2,
+                repeat: Infinity,
+                delay: i * 0.2,
+                ease: "easeInOut"
+              }}
+            />
+          ))}
+
           {/* Header */}
-          <div className="p-8 pb-6 border-b border-white/10 bg-gradient-to-r from-slate-800/50 to-slate-700/50">
-            <div className="flex items-center justify-between">
-              <h2 
-                id={`${section.id}-title`}
-                className="text-4xl font-bold text-white"
-              >
-                {section.title}
-              </h2>
-              <button
+          <div className="relative p-8 pb-6 border-b border-cyan-400/20 bg-gradient-to-r from-slate-900/50 via-slate-800/50 to-slate-900/50">
+            {/* Header Background Glow */}
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-blue-500/5 to-purple-500/5" />
+            
+            <div className="relative z-10 flex items-center justify-between">
+              <div>
+                <motion.h2 
+                  id={`${section.id}-title`}
+                  className="text-4xl font-black text-white tracking-wide"
+                  style={{
+                    textShadow: '0 0 20px rgba(34, 211, 238, 0.6), 0 2px 8px rgba(0, 0, 0, 0.8)'
+                  }}
+                  animate={{
+                    textShadow: [
+                      '0 0 15px rgba(34, 211, 238, 0.4), 0 2px 8px rgba(0, 0, 0, 0.8)',
+                      '0 0 25px rgba(34, 211, 238, 0.8), 0 2px 8px rgba(0, 0, 0, 0.8)',
+                      '0 0 15px rgba(34, 211, 238, 0.4), 0 2px 8px rgba(0, 0, 0, 0.8)'
+                    ]
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                >
+                  {section.title}
+                </motion.h2>
+                
+              </div>
+              
+              <motion.button
                 onClick={onClose}
-                className="p-3 rounded-full hover:bg-white/10 transition-colors duration-200"
+                className="relative p-4 rounded-2xl bg-gradient-to-br from-slate-800/80 to-slate-900/80 border border-red-400/30 backdrop-blur-lg group overflow-hidden"
+                style={{
+                  boxShadow: '0 8px 20px rgba(0, 0, 0, 0.3), 0 0 10px rgba(239, 68, 68, 0.2)'
+                }}
+                whileHover={{ 
+                  scale: 1.1,
+                  boxShadow: '0 12px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(239, 68, 68, 0.4)'
+                }}
+                whileTap={{ scale: 0.9 }}
                 aria-label="Close"
                 data-focusable
               >
-                <X className="w-6 h-6 text-white/70" />
-              </button>
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-red-500/10 to-red-600/10 opacity-0 group-hover:opacity-100"
+                  transition={{ duration: 0.3 }}
+                />
+                <X className="w-6 h-6 text-red-400 group-hover:text-white transition-colors duration-300 relative z-10" />
+              </motion.button>
             </div>
-            <p className="text-xl text-white/70 mt-3">{section.short}</p>
+            
+            <motion.p 
+              className="text-xl text-cyan-200/90 mt-4 relative z-10"
+              style={{
+                textShadow: '0 2px 4px rgba(0, 0, 0, 0.6)'
+              }}
+            >
+              {section.short}
+            </motion.p>
           </div>
 
           {/* Content */}
-          <div className="p-8 flex-1 overflow-y-auto">
+          <div className="relative p-8 pb-12 flex-1 overflow-y-auto">
             <div className="max-w-4xl mx-auto">
-              <ul className="space-y-6">
+              <motion.ul className="space-y-6">
                 {section.content.map((item, index) => (
-                  <li key={index} className="flex items-start gap-4 p-4 bg-slate-800/30 rounded-xl border border-white/5 hover:bg-slate-800/50 transition-colors duration-200">
-                    <div className="w-3 h-3 bg-emerald-400 rounded-full mt-2 flex-shrink-0 shadow-lg" />
-                    <span className="text-lg text-white/90 leading-relaxed">{item}</span>
-                  </li>
+                  <motion.li 
+                    key={index} 
+                    className="group relative overflow-hidden"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1, duration: 0.5 }}
+                  >
+                    <div 
+                      className="flex items-start gap-6 p-6 rounded-2xl border backdrop-blur-lg transition-all duration-300 group-hover:scale-[1.02]"
+                      style={{
+                        background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.6) 0%, rgba(30, 41, 59, 0.4) 100%)',
+                        border: '1px solid rgba(34, 211, 238, 0.2)',
+                        boxShadow: '0 8px 25px rgba(0, 0, 0, 0.3), 0 0 15px rgba(34, 211, 238, 0.1)'
+                      }}
+                    >
+                      {/* Animated Bullet Point */}
+                      <motion.div 
+                        className="relative mt-2 flex-shrink-0"
+                        whileHover={{ scale: 1.2 }}
+                      >
+                        <div className="w-4 h-4 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full shadow-lg relative z-10" />
+                        <motion.div 
+                          className="absolute inset-0 w-4 h-4 bg-cyan-400 rounded-full"
+                          animate={{
+                            scale: [1, 1.5, 1],
+                            opacity: [0.5, 0, 0.5]
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            delay: index * 0.2
+                          }}
+                        />
+                      </motion.div>
+                      
+                      <span className="text-lg text-white/95 leading-relaxed font-medium">
+                        {item}
+                      </span>
+                    </div>
+
+                    {/* Hover Glow Effect */}
+                    <motion.div
+                      className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 pointer-events-none"
+                      transition={{ duration: 0.3 }}
+                    />
+                  </motion.li>
                 ))}
-              </ul>
-              
-              {/* Additional content space for future expansion */}
-              <div className="mt-12 p-8 bg-slate-800/20 rounded-2xl border border-white/5">
-                <h3 className="text-2xl font-semibold text-white mb-4">More Details Coming Soon</h3>
-                <p className="text-white/70 text-lg leading-relaxed">
-                  This section will be expanded with more detailed information, images, and interactive elements.
-                </p>
-              </div>
+              </motion.ul>
             </div>
           </div>
 
-          {/* Footer */}
-          <div className="p-8 pt-6 border-t border-white/10 bg-gradient-to-r from-slate-700/50 to-slate-800/50">
-            <div className="max-w-4xl mx-auto">
-              <button className="w-full px-8 py-4 bg-emerald-500 hover:bg-emerald-600 rounded-2xl text-white font-semibold text-lg transition-all duration-200 flex items-center justify-center gap-3 group hover:scale-105 shadow-lg">
-                {section.cta}
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" />
-              </button>
-            </div>
-          </div>
+
         </motion.div>
       </motion.div>
     </AnimatePresence>
