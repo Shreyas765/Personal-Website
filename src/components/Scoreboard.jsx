@@ -23,7 +23,7 @@ const Scoreboard = ({ score, hasWon }) => {
       }}
     >
       <motion.div
-        className="px-10 py-5 bg-gradient-to-r from-slate-900/95 via-slate-800/95 to-slate-900/95 border border-cyan-400/50 rounded-2xl font-bold text-4xl text-white flex items-center gap-6 backdrop-blur-lg relative overflow-hidden"
+        className="px-12 py-5 bg-gradient-to-r from-slate-900/95 via-slate-800/95 to-slate-900/95 border border-cyan-400/50 rounded-2xl font-bold text-4xl text-white flex items-center gap-8 backdrop-blur-lg relative overflow-hidden"
         style={{
           boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(34, 211, 238, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
           fontFamily: 'system-ui, -apple-system, sans-serif',

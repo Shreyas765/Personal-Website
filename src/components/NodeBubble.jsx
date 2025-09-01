@@ -163,7 +163,9 @@ const NodeBubble = ({ section, onClick, disabled = false }) => {
       
       {/* Content directly over target */}
       <div className="relative z-10">
-        <h3 className="text-lg font-black text-black mb-0 transition-colors duration-200 drop-shadow-[2px_2px_4px_rgba(255,255,255,0.8)]">
+        <h3 className="text-xl font-black text-white mb-0 transition-colors duration-200 drop-shadow-[0_0_8px_rgba(0,0,0,1)] [text-shadow:_2px_2px_4px_rgb(0_0_0_/_80%),_-1px_-1px_2px_rgb(0_0_0_/_60%),_1px_-1px_2px_rgb(0_0_0_/_60%),_-1px_1px_2px_rgb(0_0_0_/_60%)] stroke-black" style={{
+          WebkitTextStroke: '1px black'
+        }}>
           {getSectionName(section.id)}
         </h3>
       </div>

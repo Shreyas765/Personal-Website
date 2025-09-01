@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { FileText, Mail, Github, Linkedin } from 'lucide-react'
 import Scoreboard from './Scoreboard'
 import NodeBubble from './NodeBubble'
 import { sections } from '../data/sections'
@@ -190,9 +191,136 @@ const HubScene = ({ onSectionOpen, score, hasWon }) => {
         ))}
       </div>
 
-      {/* Scoreboard */}
-      <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20">
+      {/* Scoreboard with Side Buttons */}
+      <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20 flex items-center gap-6">
+        {/* Left Side Buttons */}
+        <motion.div 
+          className="flex gap-3"
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.8, duration: 0.6, ease: "easeOut" }}
+        >
+          {/* Resume Button */}
+          <motion.button
+            className="group relative w-12 h-12 bg-gradient-to-br from-slate-800 via-slate-700 to-slate-900 border border-cyan-400/30 rounded-xl flex items-center justify-center backdrop-blur-lg overflow-hidden"
+            style={{
+              boxShadow: '0 8px 20px rgba(0, 0, 0, 0.3), 0 0 10px rgba(34, 211, 238, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+            }}
+            whileHover={{ 
+              scale: 1.1,
+              boxShadow: '0 12px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(34, 211, 238, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
+            }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => {
+              // Add resume download/view logic here
+              console.log('Resume clicked');
+            }}
+          >
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-blue-500/5 to-purple-500/10 opacity-0 group-hover:opacity-100"
+              transition={{ duration: 0.3 }}
+            />
+            <FileText className="w-5 h-5 text-cyan-400 group-hover:text-white transition-colors duration-300 relative z-10" />
+            
+            {/* Tooltip */}
+            <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-slate-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+              Resume
+            </div>
+          </motion.button>
+
+          {/* Contact Button */}
+          <motion.button
+            className="group relative w-12 h-12 bg-gradient-to-br from-slate-800 via-slate-700 to-slate-900 border border-emerald-400/30 rounded-xl flex items-center justify-center backdrop-blur-lg overflow-hidden"
+            style={{
+              boxShadow: '0 8px 20px rgba(0, 0, 0, 0.3), 0 0 10px rgba(16, 185, 129, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+            }}
+            whileHover={{ 
+              scale: 1.1,
+              boxShadow: '0 12px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(16, 185, 129, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
+            }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => {
+              // Add contact logic here (email, contact form, etc.)
+              console.log('Contact clicked');
+            }}
+          >
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 via-green-500/5 to-teal-500/10 opacity-0 group-hover:opacity-100"
+              transition={{ duration: 0.3 }}
+            />
+            <Mail className="w-5 h-5 text-emerald-400 group-hover:text-white transition-colors duration-300 relative z-10" />
+            
+            {/* Tooltip */}
+            <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-slate-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+              Contact
+            </div>
+          </motion.button>
+        </motion.div>
+
+        {/* Scoreboard */}
         <Scoreboard score={score} hasWon={hasWon} />
+
+        {/* Right Side Buttons */}
+        <motion.div 
+          className="flex gap-3"
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.8, duration: 0.6, ease: "easeOut" }}
+        >
+          {/* GitHub Button */}
+          <motion.button
+            className="group relative w-12 h-12 bg-gradient-to-br from-slate-800 via-slate-700 to-slate-900 border border-purple-400/30 rounded-xl flex items-center justify-center backdrop-blur-lg overflow-hidden"
+            style={{
+              boxShadow: '0 8px 20px rgba(0, 0, 0, 0.3), 0 0 10px rgba(147, 51, 234, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+            }}
+            whileHover={{ 
+              scale: 1.1,
+              boxShadow: '0 12px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(147, 51, 234, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
+            }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => {
+              window.open('https://github.com/shreyas765', '_blank');
+            }}
+          >
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-violet-500/5 to-indigo-500/10 opacity-0 group-hover:opacity-100"
+              transition={{ duration: 0.3 }}
+            />
+            <Github className="w-5 h-5 text-purple-400 group-hover:text-white transition-colors duration-300 relative z-10" />
+            
+            {/* Tooltip */}
+            <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-slate-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+              GitHub
+            </div>
+          </motion.button>
+
+          {/* LinkedIn Button */}
+          <motion.button
+            className="group relative w-12 h-12 bg-gradient-to-br from-slate-800 via-slate-700 to-slate-900 border border-blue-400/30 rounded-xl flex items-center justify-center backdrop-blur-lg overflow-hidden"
+            style={{
+              boxShadow: '0 8px 20px rgba(0, 0, 0, 0.3), 0 0 10px rgba(59, 130, 246, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+            }}
+            whileHover={{ 
+              scale: 1.1,
+              boxShadow: '0 12px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(59, 130, 246, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
+            }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => {
+              window.open('https://linkedin.com/in/shreyas-arisa', '_blank');
+            }}
+          >
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-sky-500/5 to-cyan-500/10 opacity-0 group-hover:opacity-100"
+              transition={{ duration: 0.3 }}
+            />
+            <Linkedin className="w-5 h-5 text-blue-400 group-hover:text-white transition-colors duration-300 relative z-10" />
+            
+            {/* Tooltip */}
+            <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-slate-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+              LinkedIn
+            </div>
+          </motion.button>
+        </motion.div>
       </div>
 
       {/* Enhanced Sponsor Board - Professional Roles with Realistic Sections */}
