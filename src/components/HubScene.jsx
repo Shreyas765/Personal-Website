@@ -7,6 +7,34 @@ import { sections } from '../data/sections'
 const HubScene = ({ onSectionOpen, score, hasWon }) => {
   const [isFirstVisit, setIsFirstVisit] = useState(false)
 
+  // Generate random stars for the background
+  const generateStars = (count) => {
+    return Array.from({ length: count }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 70, // Only in upper 70% of screen
+      size: Math.random() * 3 + 1,
+      opacity: Math.random() * 0.8 + 0.2,
+      twinkleDelay: Math.random() * 3
+    }))
+  }
+
+  // Generate shooting stars
+  const generateShootingStars = (count) => {
+    return Array.from({ length: count }, (_, i) => ({
+      id: i,
+      startX: Math.random() * 50 + 50, // Start from right side
+      startY: Math.random() * 30 + 10, // Upper portion
+      endX: Math.random() * 50, // End on left side
+      endY: Math.random() * 30 + 40, // Lower portion
+      delay: Math.random() * 10,
+      duration: Math.random() * 2 + 1
+    }))
+  }
+
+  const [stars] = useState(() => generateStars(150))
+  const [shootingStars] = useState(() => generateShootingStars(5))
+
   // Calculate positions for the four nodes in corners
   const getNodePosition = (index, total = 4) => {
     const positions = [
@@ -20,6 +48,77 @@ const HubScene = ({ onSectionOpen, score, hasWon }) => {
 
   return (
     <div className="relative h-full w-full bg-black overflow-hidden">
+      {/* Starry Sky Background */}
+      <div className="absolute inset-0 z-0">
+        {/* Background gradient for night sky */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(to bottom, #0f172a 0%, #1e293b 30%, #334155 70%, #000000 100%)'
+          }}
+        />
+        
+        {/* Static Stars */}
+        {stars.map((star) => (
+          <motion.div
+            key={star.id}
+            className="absolute bg-white rounded-full"
+            style={{
+              left: `${star.x}%`,
+              top: `${star.y}%`,
+              width: `${star.size}px`,
+              height: `${star.size}px`,
+            }}
+            animate={{
+              opacity: [star.opacity * 0.3, star.opacity, star.opacity * 0.3],
+              scale: [0.8, 1.2, 0.8]
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              delay: star.twinkleDelay,
+              ease: "easeInOut"
+            }}
+          />
+        ))}
+
+        {/* Shooting Stars */}
+        {shootingStars.map((shootingStar) => (
+          <motion.div
+            key={shootingStar.id}
+            className="absolute"
+            style={{
+              left: `${shootingStar.startX}%`,
+              top: `${shootingStar.startY}%`,
+            }}
+            animate={{
+              x: [`0vw`, `${shootingStar.endX - shootingStar.startX}vw`],
+              y: [`0vh`, `${shootingStar.endY - shootingStar.startY}vh`],
+              opacity: [0, 1, 1, 0]
+            }}
+            transition={{
+              duration: shootingStar.duration,
+              repeat: Infinity,
+              delay: shootingStar.delay,
+              repeatDelay: 8 + Math.random() * 5,
+              ease: "easeOut"
+            }}
+          >
+            {/* Shooting star trail */}
+            <div 
+              className="relative"
+              style={{
+                width: '60px',
+                height: '2px',
+                background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.8) 20%, rgba(147,197,253,1) 60%, rgba(255,255,255,1) 100%)',
+                boxShadow: '0 0 10px rgba(147,197,253,0.8), 0 0 20px rgba(147,197,253,0.4)',
+                borderRadius: '1px'
+              }}
+            />
+          </motion.div>
+        ))}
+      </div>
+
       {/* Scoreboard */}
       <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20">
         <Scoreboard score={score} hasWon={hasWon} />
@@ -65,13 +164,13 @@ const HubScene = ({ onSectionOpen, score, hasWon }) => {
       </div>
 
       {/* Center Profile Picture - About Me */}
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30">
         <motion.button
-          className="w-44 h-44 rounded-full ring-4 ring-emerald-400/30 shadow-2xl bg-gradient-to-br from-slate-600 to-slate-800 flex items-center justify-center text-4xl font-bold text-white overflow-hidden cursor-pointer hover:ring-emerald-400/50 transition-all duration-200"
+          className="w-56 h-56 rounded-full ring-4 ring-blue-400/30 shadow-2xl bg-gradient-to-br from-slate-600 to-slate-800 flex items-center justify-center text-4xl font-bold text-white overflow-hidden cursor-pointer hover:ring-blue-400/50 transition-all duration-200"
           onClick={() => onSectionOpen('about')}
           whileHover={{ 
             scale: 1.05,
-            ringColor: "rgba(16, 185, 129, 0.5)"
+            ringColor: "rgba(59, 130, 246, 0.5)"
           }}
           whileTap={{ scale: 0.95 }}
           animate={{ 

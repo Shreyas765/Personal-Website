@@ -11,9 +11,20 @@ const NodeBubble = ({ section, onClick }) => {
     setTimeout(() => setIsClicked(false), 300)
   }
 
+  // Map section IDs to simplified names
+  const getSectionName = (sectionId) => {
+    const nameMap = {
+      'experience': 'Experience',
+      'projects': 'Projects', 
+      'tech': 'Tech Stack',
+      'education': 'Education'
+    }
+    return nameMap[sectionId] || sectionId
+  }
+
   return (
     <motion.button
-      className="w-36 h-36 rounded-full shadow-xl flex flex-col items-center justify-center text-center p-2 cursor-pointer group relative"
+      className="w-36 h-36 rounded-full shadow-xl flex flex-col items-center justify-center text-center p-2 cursor-pointer group relative overflow-hidden"
       onClick={handleClick}
       whileHover={{ 
         scale: 1.1,
@@ -35,10 +46,67 @@ const NodeBubble = ({ section, onClick }) => {
       aria-controls={`panel-${section.id}`}
       aria-expanded="false"
       style={{
-        background: 'linear-gradient(135deg, #7f1d1d 0%, #dc2626 50%, #ef4444 100%)',
-        border: '2px solid rgba(220, 38, 38, 0.5)'
+        background: '#ffffff',
+        border: '3px solid #dc2626'
       }}
     >
+      {/* Target Circles Background */}
+      <div className="absolute inset-0 rounded-full overflow-hidden">
+        {/* Outermost red circle */}
+        <div 
+          className="absolute inset-0 rounded-full"
+          style={{
+            background: '#dc2626'
+          }}
+        />
+        
+        {/* Second white circle */}
+        <div 
+          className="absolute rounded-full bg-white"
+          style={{
+            top: '10%',
+            left: '10%',
+            width: '80%',
+            height: '80%'
+          }}
+        />
+        
+        {/* Third red circle */}
+        <div 
+          className="absolute rounded-full"
+          style={{
+            top: '20%',
+            left: '20%',
+            width: '60%',
+            height: '60%',
+            background: '#dc2626'
+          }}
+        />
+        
+        {/* Fourth white circle */}
+        <div 
+          className="absolute rounded-full bg-white"
+          style={{
+            top: '30%',
+            left: '30%',
+            width: '40%',
+            height: '40%'
+          }}
+        />
+        
+        {/* Center red circle */}
+        <div 
+          className="absolute rounded-full"
+          style={{
+            top: '40%',
+            left: '40%',
+            width: '20%',
+            height: '20%',
+            background: '#dc2626'
+          }}
+        />
+      </div>
+
       {/* Subtle glow effect on hover */}
       <div className="absolute inset-0 rounded-full bg-red-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm" />
       
@@ -92,16 +160,12 @@ const NodeBubble = ({ section, onClick }) => {
         )}
       </AnimatePresence>
       
-      {/* Content */}
+      {/* Content directly over target */}
       <div className="relative z-10">
-        <h3 className="text-sm font-semibold text-white mb-1 group-hover:text-red-400 transition-colors duration-200 drop-shadow-sm">
-          {section.title}
+        <h3 className="text-lg font-black text-black mb-0 transition-colors duration-200 drop-shadow-[2px_2px_4px_rgba(255,255,255,0.8)]">
+          {getSectionName(section.id)}
         </h3>
-        <p className="text-xs text-white/80 group-hover:text-white/90 transition-colors duration-200 drop-shadow-sm">
-          {section.short}
-        </p>
       </div>
-
 
     </motion.button>
   )
