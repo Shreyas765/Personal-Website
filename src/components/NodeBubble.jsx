@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
-const NodeBubble = ({ section, onClick }) => {
+const NodeBubble = ({ section, onClick, disabled = false }) => {
   const [isClicked, setIsClicked] = useState(false)
 
   const handleClick = () => {
+    if (disabled) return
     setIsClicked(true)
     onClick()
     // Reset click state after animation
@@ -24,17 +25,17 @@ const NodeBubble = ({ section, onClick }) => {
 
   return (
     <motion.button
-      className="w-36 h-36 rounded-full shadow-xl flex flex-col items-center justify-center text-center p-2 cursor-pointer group relative overflow-hidden"
+      className={`w-36 h-36 rounded-full shadow-xl flex flex-col items-center justify-center text-center p-2 group relative overflow-hidden ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
       onClick={handleClick}
-      whileHover={{ 
+      whileHover={disabled ? {} : { 
         scale: 1.1,
         boxShadow: "0 25px 50px -12px rgba(220, 38, 38, 0.25)"
       }}
-      whileTap={{ 
+      whileTap={disabled ? {} : { 
         scale: 1.3,
         transition: { duration: 0.2 }
       }}
-      animate={{ 
+      animate={disabled ? {} : { 
         scale: [1, 1.02, 1],
         y: [0, -2, 0]
       }}

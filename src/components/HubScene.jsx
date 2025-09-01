@@ -6,6 +6,11 @@ import { sections } from '../data/sections'
 
 const HubScene = ({ onSectionOpen, score, hasWon }) => {
   const [isFirstVisit, setIsFirstVisit] = useState(false)
+  const [ballAnimation, setBallAnimation] = useState(null) // { targetId, targetPosition }
+  const [isAnimating, setIsAnimating] = useState(false)
+
+  // Ball starting position (penalty spot)
+  const ballStartPosition = { x: -10, y: 400 } // Relative to center
 
   // Generate random stars for the background
   const generateStars = (count) => {
@@ -44,6 +49,72 @@ const HubScene = ({ onSectionOpen, score, hasWon }) => {
       { x: 375, y: 115 }    // Bottom right - Education  
     ]
     return positions[index] || { x: 0, y: 0 }
+  }
+
+  // Handle node clicks with ball animation
+  const handleNodeClick = (sectionId) => {
+    if (isAnimating) return
+    
+    setIsAnimating(true)
+    let targetPosition
+    
+    if (sectionId === 'about') {
+      targetPosition = { x: 0, y: 0 } // Center position
+    } else {
+      const sectionIndex = sections.findIndex(s => s.id === sectionId)
+      targetPosition = getNodePosition(sectionIndex)
+    }
+    
+    setBallAnimation({ targetId: sectionId, targetPosition })
+    
+    // After animation completes, open the section
+    setTimeout(() => {
+      setBallAnimation(null)
+      setIsAnimating(false)
+      onSectionOpen(sectionId)
+    }, 1200) // Animation duration + small delay
+  }
+
+  // Soccer Ball Component
+  const SoccerBall = ({ position, targetPosition, isAnimating }) => {
+    return (
+      <motion.div
+        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-40"
+        initial={{ 
+          x: ballStartPosition.x, 
+          y: ballStartPosition.y,
+          scale: 1
+        }}
+        animate={isAnimating ? {
+          x: targetPosition.x,
+          y: targetPosition.y,
+          scale: [1, 1.2, 0.8],
+          rotate: [0, 720] // Two full rotations
+        } : {
+          x: ballStartPosition.x,
+          y: ballStartPosition.y,
+          scale: 1,
+          rotate: 0
+        }}
+        transition={{
+          duration: 1,
+          ease: "easeInOut",
+          scale: { times: [0, 0.5, 1] }
+        }}
+      >
+                <div className="w-20 h-20 rounded-full overflow-hidden">
+          <img 
+            src="/Pictures/soccerball.png" 
+            alt="Soccer Ball" 
+            className="w-full h-full object-cover"
+            style={{
+              transform: 'scale(2.5) translateX(0%) translateY(3.5%)',
+              transformOrigin: 'center center'
+            }}
+          />
+        </div>
+      </motion.div>
+    )
   }
 
   return (
@@ -165,32 +236,89 @@ const HubScene = ({ onSectionOpen, score, hasWon }) => {
 
       {/* Center Profile Picture - About Me */}
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30">
+        {/* Circular Text Around Profile Picture */}
+        <div className="absolute inset-0 w-96 h-96 -top-16 -left-16 pointer-events-none">
+          <svg 
+            className="w-full h-full" 
+            viewBox="0 0 384 384"
+          >
+            {/* Define the circular path for text */}
+            <defs>
+              {/* Top arc - convex down */}
+              <path
+                id="circle-top"
+                d="M 50,192 A 142,142 0 0,1 334,192"
+                fill="none"
+              />
+              {/* Bottom arc - convex up  */}
+              <path
+                id="circle-bottom"
+                d="M 50,210 A 142,142 0 0,0 334,210"
+                fill="none"
+              />
+            </defs>
+            
+            {/* Top text - "SHREYAS ARISA" (convex down) */}
+            <text className="fill-white text-2xl font-black tracking-[0.3em]" style={{ 
+              fontSize: '24px', 
+              fontWeight: '900',
+              strokeWidth: '1px',
+              stroke: 'rgba(0,0,0,0.5)',
+              filter: 'drop-shadow(0 3px 6px rgba(0,0,0,0.9)) drop-shadow(0 0 8px rgba(255,255,255,0.3))' 
+            }}>
+              <textPath href="#circle-top" startOffset="50%" textAnchor="middle">
+                SHREYAS ARISA
+              </textPath>
+            </text>
+            
+            {/* Bottom text - "CS @ GEORGIA TECH" (convex up) */}
+            <text className="fill-cyan-400 text-xl font-black tracking-[0.2em]" style={{ 
+              fontSize: '22px', 
+              fontWeight: '900',
+              strokeWidth: '1px',
+              stroke: 'rgba(0,0,0,0.5)',
+              filter: 'drop-shadow(0 3px 6px rgba(0,0,0,0.9)) drop-shadow(0 0 8px rgba(34,211,238,0.4))' 
+            }}>
+              <textPath href="#circle-bottom" startOffset="50%" textAnchor="middle">
+                CS @ GEORGIA TECH
+              </textPath>
+            </text>
+          </svg>
+        </div>
+
         <motion.button
-          className="w-56 h-56 rounded-full ring-4 ring-blue-400/30 shadow-2xl bg-gradient-to-br from-slate-600 to-slate-800 flex items-center justify-center text-4xl font-bold text-white overflow-hidden cursor-pointer hover:ring-blue-400/50 transition-all duration-200"
-          onClick={() => onSectionOpen('about')}
+          className="w-64 h-64 rounded-full ring-4 ring-blue-400/30 shadow-2xl bg-gradient-to-br from-slate-600 to-slate-800 flex items-center justify-center text-4xl font-bold text-white overflow-hidden cursor-pointer hover:ring-blue-400/50 transition-all duration-200 relative z-10"
+          onClick={() => handleNodeClick('about')}
           whileHover={{ 
             scale: 1.05,
             ringColor: "rgba(59, 130, 246, 0.5)"
           }}
           whileTap={{ scale: 0.95 }}
-          animate={{ 
-            scale: [1, 1.02, 1],
-            rotate: [0, 1, -1, 0],
-            x: [0, 10, -8, 5, 0],
-            y: [0, -5, 8, -3, 0]
-          }}
-          transition={{ 
-            duration: 8,
-            ease: "easeInOut",
-            repeat: Infinity
-          }}
+          disabled={isAnimating}
         >
-          {/* Placeholder for profile picture */}
-          <div className="w-full h-full flex items-center justify-center">
-            <span className="flex justify-center text-3xl">Shreyas Arisa</span>
+          {/* Profile picture */}
+          <div className="w-full h-full flex items-center justify-center overflow-hidden rounded-full">
+            <img 
+              src="/Pictures/mypic.png" 
+              alt="Shreyas Arisa - Profile" 
+              className="w-full h-full object-cover"
+              style={{
+                transform: 'scale(1.7) translateX(12%) translateY(5%)',
+                transformOrigin: 'center center'
+              }}
+              onError={(e) => {
+                // Fallback to text if image fails to load
+                e.target.style.display = 'none';
+                e.target.nextSibling.style.display = 'flex';
+              }}
+            />
+            <span 
+              className="hidden w-full h-full items-center justify-center text-3xl text-white"
+              style={{ display: 'none' }}
+            >
+              Shreyas Arisa
+            </span>
           </div>
-          {/* Add your profile picture here by replacing the span above with: */}
-          {/* <img src="/path-to-your-photo.jpg" alt="Profile" className="w-full h-full object-cover" /> */}
         </motion.button>
       </div>
 
@@ -221,11 +349,19 @@ const HubScene = ({ onSectionOpen, score, hasWon }) => {
           >
             <NodeBubble
               section={section}
-              onClick={() => onSectionOpen(section.id)}
+              onClick={() => handleNodeClick(section.id)}
+              disabled={isAnimating}
             />
           </motion.div>
         )
       })}
+
+      {/* Soccer Ball */}
+      <SoccerBall 
+        position={ballStartPosition}
+        targetPosition={ballAnimation?.targetPosition || ballStartPosition}
+        isAnimating={isAnimating && ballAnimation}
+      />
 
       {/* Soccer Goal - Realistic Position */}
       {/* Goal frame - main structure */}
