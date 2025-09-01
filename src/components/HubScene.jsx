@@ -10,10 +10,10 @@ const HubScene = ({ onSectionOpen, score, hasWon }) => {
   // Calculate positions for the four nodes in corners
   const getNodePosition = (index, total = 4) => {
     const positions = [
-      { x: -470, y: -260 }, // Top left - Experience
-      { x: 330, y: -260 },  // Top right - Projects
-      { x: -470, y: 60 },  // Bottom left - Tech Stack
-      { x: 330, y: 60 }    // Bottom right - Education  
+      { x: -520, y: -260 }, // Top left - Experience
+      { x: 375, y: -260 },  // Top right - Projects
+      { x: -520, y: 115 },  // Bottom left - Tech Stack
+      { x: 375, y: 115 }    // Bottom right - Education  
     ]
     return positions[index] || { x: 0, y: 0 }
   }
@@ -26,77 +26,41 @@ const HubScene = ({ onSectionOpen, score, hasWon }) => {
       </div>
 
       {/* Enhanced Sponsor Board - Professional Roles with Realistic Sections */}
-      <div className="absolute bottom-36 left-0 w-full z-1 overflow-hidden">
+      <div className="absolute bottom-60 left-0 w-full z-10 overflow-hidden">
         <motion.div
-          className="flex items-center h-160 shadow-2xl"
+          className="flex items-center h-24 shadow-2xl"
           style={{ 
-            width: '200%'
+            width: 'max-content'
           }}
           animate={{
-            x: [0, -800]
+            x: ['0%', '-15%']
           }}
           transition={{
-            duration: 20,
+            duration: 60,
             repeat: Infinity,
             ease: "linear",
             repeatType: "loop"
           }}
         >
-          {/* First set of sponsor sections */}
-          <div className="flex items-center whitespace-nowrap">
-             {/* Sponsor Section 1 - Red */}
-             <div className="flex flex-col items-center justify-center px-12 h-full bg-red-600" style={{ minWidth: '200px' }}>
-               <span className="text-white font-bold text-3xl tracking-wide drop-shadow-lg">SOFTWARE</span>
-               <span className="text-white font-bold text-3xl tracking-wide drop-shadow-lg">DEVELOPER</span>
-             </div>
-             
-             {/* Sponsor Section 2 - Blue */}
-             <div className="flex flex-col items-center justify-center px-12 h-full bg-blue-600" style={{ minWidth: '200px' }}>
-               <span className="text-white font-bold text-3xl tracking-wide drop-shadow-lg">SOFTWARE</span>
-               <span className="text-white font-bold text-3xl tracking-wide drop-shadow-lg">RESEARCHER</span>
-             </div>
-             
-             {/* Sponsor Section 3 - Light Green */}
-             <div className="flex flex-col items-center justify-center px-12 h-full bg-green-400" style={{ minWidth: '200px' }}>
-               <span className="text-black font-bold text-3xl tracking-wide drop-shadow-lg">SOFTWARE</span>
-               <span className="text-black font-bold text-3xl tracking-wide drop-shadow-lg">DESIGNER</span>
-             </div>
-             
-             {/* Sponsor Section 4 - Yellow */}
-             <div className="flex flex-col items-center justify-center px-12 h-full bg-yellow-500" style={{ minWidth: '200px' }}>
-               <span className="text-black font-bold text-3xl tracking-wide drop-shadow-lg">SOFTWARE</span>
-               <span className="text-black font-bold text-3xl tracking-wide drop-shadow-lg">ENGINEER</span>
-             </div>
-          </div>
-          
-          {/* Duplicate set 1 for seamless loop */}
-          <div className="flex items-center whitespace-nowrap">
-             {/* Sponsor Section 1 - Red (duplicate) */}
-             <div className="flex flex-col items-center justify-center px-12 h-full bg-red-600" style={{ minWidth: '200px' }}>
-               <span className="text-white font-bold text-3xl tracking-wide drop-shadow-lg">SOFTWARE</span>
-               <span className="text-white font-bold text-3xl tracking-wide drop-shadow-lg">DEVELOPER</span>
-             </div>
-             
-             {/* Sponsor Section 2 - Blue (duplicate) */}
-             <div className="flex flex-col items-center justify-center px-12 h-full bg-blue-600" style={{ minWidth: '200px' }}>
-               <span className="text-white font-bold text-3xl tracking-wide drop-shadow-lg">SOFTWARE</span>
-               <span className="text-white font-bold text-3xl tracking-wide drop-shadow-lg">RESEARCHER</span>
-             </div>
-             
-             {/* Sponsor Section 3 - Light Green (duplicate) */}
-             <div className="flex flex-col items-center justify-center px-12 h-full bg-green-400" style={{ minWidth: '200px' }}>
-               <span className="text-black font-bold text-3xl tracking-wide drop-shadow-lg">SOFTWARE</span>
-               <span className="text-black font-bold text-3xl tracking-wide drop-shadow-lg">DESIGNER</span>
-             </div>
-             
-             {/* Sponsor Section 4 - Yellow (duplicate) */}
-             <div className="flex flex-col items-center justify-center px-12 h-full bg-yellow-500" style={{ minWidth: '200px' }}>
-               <span className="text-black font-bold text-3xl tracking-wide drop-shadow-lg">SOFTWARE</span>
-               <span className="text-black font-bold text-3xl tracking-wide drop-shadow-lg">ENGINEER</span>
-             </div>
-          </div>
-
-
+          {/* Sponsor sections with enhanced styling */}
+          {Array.from({ length: 20 }, (_, i) => [
+            { title: 'SOFTWARE', subtitle: 'DESIGNER', bgColor: 'bg-gradient-to-br from-red-500 to-red-700', textColor: 'text-white', shadow: 'shadow-red-500/30' },
+            { title: 'AI/ML', subtitle: 'RESEARCHER', bgColor: 'bg-gradient-to-br from-blue-500 to-blue-700', textColor: 'text-white', shadow: 'shadow-blue-500/30' },
+            { title: 'SOFTWARE', subtitle: 'ENGINEER', bgColor: 'bg-gradient-to-br from-yellow-500 to-yellow-600', textColor: 'text-black', shadow: 'shadow-yellow-500/30' }
+          ]).flat().map((sponsor, index) => (
+            <div 
+              key={index}
+              className={`flex flex-col items-center justify-center px-8 h-full ${sponsor.bgColor} ${sponsor.shadow} border-r-2 border-white/20`} 
+              style={{ minWidth: '280px' }}
+            >
+              <span className={`${sponsor.textColor} font-black text-2xl tracking-wider drop-shadow-2xl mb-1`}>
+                {sponsor.title}
+              </span>
+              <span className={`${sponsor.textColor} font-black text-2xl tracking-wider drop-shadow-2xl`}>
+                {sponsor.subtitle}
+              </span>
+            </div>
+          ))}
         </motion.div>
       </div>
 
@@ -137,7 +101,7 @@ const HubScene = ({ onSectionOpen, score, hasWon }) => {
         return (
           <motion.div
             key={section.id}
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30"
             initial={{ 
               x: position.x, 
               y: position.y,
@@ -164,38 +128,75 @@ const HubScene = ({ onSectionOpen, score, hasWon }) => {
         )
       })}
 
-      {/* Soccer Goal Background - Behind the Grass */}
+      {/* Soccer Goal - Realistic Position */}
       {/* Goal frame - main structure */}
-      <div className="absolute bottom-1/3 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-2/3 h-3/4 z-1">
+      <div className="absolute bottom-56 left-1/2 transform -translate-x-1/2 w-[1100px] h-[575px] z-20">
         {/* Left post */}
         <div className="absolute left-0 top-0 w-4 h-full bg-white shadow-lg" style={{
           background: 'linear-gradient(to right, #ffffff, #f8f9fa)',
-          boxShadow: '2px 0 8px rgba(0, 0, 0, 0.3)'
+          boxShadow: '4px 0 12px rgba(0, 0, 0, 0.4)'
         }}></div>
         
         {/* Right post */}
         <div className="absolute right-0 top-0 w-4 h-full bg-white shadow-lg" style={{
           background: 'linear-gradient(to left, #ffffff, #f8f9fa)',
-          boxShadow: '-2px 0 8px rgba(0, 0, 0, 0.3)'
+          boxShadow: '-4px 0 12px rgba(0, 0, 0, 0.4)'
         }}></div>
         
         {/* Top crossbar */}
         <div className="absolute top-0 left-0 w-full h-4 bg-white shadow-lg" style={{
           background: 'linear-gradient(to bottom, #ffffff, #f8f9fa)',
-          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)'
+          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.4)'
         }}></div>
         
-        {/* Goal net pattern */}
+        {/* Goal net pattern - more realistic */}
         <div 
-          className="absolute inset-0 opacity-30"
+          className="absolute inset-0 opacity-50"
           style={{
             backgroundImage: `
-              linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%),
-              linear-gradient(0deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%)
+              linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.5) 2px, transparent 4px),
+              linear-gradient(0deg, transparent 0%, rgba(255,255,255,0.5) 2px, transparent 4px)
             `,
-            backgroundSize: '15px 15px'
+            backgroundSize: '20px 20px',
           }}
         ></div>
+      </div>
+
+      {/* Goal Line - Full Width */}
+      <div className="absolute bottom-56 left-0 w-full h-1 bg-white shadow-lg" style={{ zIndex: 2 }}></div>
+
+      {/* Goal Area / Penalty Box Lines */}
+      <div className="absolute bottom-32 left-1/2 transform -translate-x-1/2" style={{ zIndex: 2 }}>
+        {/* Penalty box rectangle */}
+        <div 
+          className="relative"
+          style={{
+            width: '1550px',
+            height: '235px',
+            transform: 'perspective(1000px) rotateX(60deg)',
+            transformOrigin: 'bottom center'
+          }}
+        >
+          {/* Bottom line */}
+          <div className="absolute bottom-0 left-0 w-full h-2 bg-white shadow-lg"></div>
+          {/* Left line */}
+          <div className="absolute top-0 left-0 w-2 h-full bg-white shadow-lg"></div>
+          {/* Right line */}
+          <div className="absolute top-0 right-0 w-2 h-full bg-white shadow-lg"></div>
+          
+          {/* Penalty spot */}
+          <div 
+            className="absolute bg-white rounded-full shadow-lg"
+            style={{
+              width: '16px',
+              height: '16px',
+              left: '50%',
+              bottom: '-100px',
+              transform: 'translateX(-50%)',
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)'
+            }}
+          ></div>
+        </div>
       </div>
 
       {/* Win Celebration CTA */}
@@ -212,178 +213,37 @@ const HubScene = ({ onSectionOpen, score, hasWon }) => {
         </motion.div>
       )}
       
-      {/* Enhanced Multi-Layer Smoother Football Pitch Grass */}
-      <div className="absolute bottom-0 left-0 w-full h-40 overflow-hidden z-10">
-        {/* Grass layer 1 - deepest background */}
-        <motion.div 
-          className="absolute bottom-0 left-0 w-full h-full"
-          style={{
-            background: 'linear-gradient(to top, #1a4a1a, #2a5a2a)',
-            clipPath: 'polygon(0% 100%, 0% 30%, 10% 28%, 20% 32%, 30% 29%, 40% 34%, 50% 31%, 60% 35%, 70% 32%, 80% 36%, 90% 33%, 100% 38%, 100% 100%)'
-          }}
-          animate={{
-            x: [0, -2, 2, 0],
-            scaleX: [1, 1.01, 0.99, 1]
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
+      {/* Pitch Grass */}
+      <div className="absolute bottom-0 left-0 w-full h-64 overflow-hidden">
+        <div className="absolute bottom-0 left-0 w-full h-64 overflow-hidden">
+          <div
+            className="absolute bottom-0 left-0 w-full h-full"
+            style={{
+              zIndex: 1,
+              background: `
+                linear-gradient(to bottom, #22c55e 0%, #16a34a 30%, #15803d 70%, #166534 100%),
+                linear-gradient(90deg, 
+                  rgba(34, 197, 94, 0.8) 0%, 
+                  rgba(22, 163, 74, 0.6) 12.5%, 
+                  rgba(34, 197, 94, 0.8) 25%, 
+                  rgba(22, 163, 74, 0.6) 37.5%, 
+                  rgba(34, 197, 94, 0.8) 50%,
+                  rgba(22, 163, 74, 0.6) 62.5%, 
+                  rgba(34, 197, 94, 0.8) 75%, 
+                  rgba(22, 163, 74, 0.6) 87.5%, 
+                  rgba(34, 197, 94, 0.8) 100%
+                ),
+                radial-gradient(ellipse 3px 1px at 25% 70%, rgba(21, 128, 61, 0.6) 0%, transparent 100%),
+                radial-gradient(ellipse 2px 1px at 75% 30%, rgba(34, 197, 94, 0.5) 0%, transparent 100%),
+                radial-gradient(ellipse 4px 1px at 45% 85%, rgba(21, 128, 61, 0.4) 0%, transparent 100%),
+                radial-gradient(ellipse 2px 1px at 85% 60%, rgba(34, 197, 94, 0.6) 0%, transparent 100%)
+              `,
+              backgroundSize: '100% 100%, 80px 100%, 12px 8px, 18px 12px, 15px 10px, 20px 14px'
+            }}
+          />
+        </div>
 
-        {/* Grass layer 2 - background */}
-        <motion.div 
-          className="absolute bottom-0 left-0 w-full h-5/6"
-          style={{
-            background: 'linear-gradient(to top, #2d5a2d, #3a6a3a)',
-            clipPath: 'polygon(0% 100%, 0% 30%, 4% 27%, 8% 33%, 12% 26%, 16% 35%, 20% 28%, 24% 36%, 28% 25%, 32% 38%, 36% 27%, 40% 39%, 44% 26%, 48% 40%, 52% 25%, 56% 41%, 60% 28%, 64% 42%, 68% 27%, 72% 43%, 76% 26%, 80% 44%, 84% 29%, 88% 45%, 92% 28%, 96% 46%, 100% 32%, 100% 100%)'
-          }}
-          animate={{
-            x: [0, -1.5, 1.5, 0],
-            scaleX: [1, 1.008, 0.992, 1]
-          }}
-          transition={{
-            duration: 6.5,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 0.3
-          }}
-        />
-        
-        {/* Grass layer 3 - mid layer */}
-        <motion.div 
-          className="absolute bottom-0 left-0 w-full h-3/4"
-          style={{
-            background: 'linear-gradient(to top, #3a6b3a, #4a7a4a)',
-            clipPath: 'polygon(0% 100%, 0% 35%, 5% 32%, 10% 38%, 15% 30%, 20% 40%, 25% 33%, 30% 41%, 35% 29%, 40% 43%, 45% 31%, 50% 44%, 55% 28%, 60% 45%, 65% 32%, 70% 46%, 75% 30%, 80% 47%, 85% 34%, 90% 48%, 95% 33%, 100% 46%, 100% 100%)'
-          }}
-          animate={{
-            x: [0, 1, -1, 0],
-            scaleX: [1, 1.005, 0.995, 1]
-          }}
-          transition={{
-            duration: 5,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 0.7
-          }}
-        />
-        
-        {/* Grass layer 4 - mid-front layer */}
-        <motion.div 
-          className="absolute bottom-0 left-0 w-full h-2/3"
-          style={{
-            background: 'linear-gradient(to top, #4a7c4a, #5a8a5a)',
-            clipPath: 'polygon(0% 100%, 0% 40%, 6% 37%, 12% 44%, 18% 35%, 24% 46%, 30% 38%, 36% 47%, 42% 34%, 48% 48%, 54% 36%, 60% 49%, 66% 33%, 72% 50%, 78% 39%, 84% 51%, 90% 37%, 96% 52%, 100% 48%, 100% 100%)'
-          }}
-          animate={{
-            x: [0, -0.8, 0.8, 0],
-            scaleX: [1, 1.003, 0.997, 1]
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1.2
-          }}
-        />
 
-        {/* Grass layer 5 - front layer */}
-        <motion.div 
-          className="absolute bottom-0 left-0 w-full h-1/2"
-          style={{
-            background: 'linear-gradient(to top, #5a8c5a, #6a9a6a)',
-            clipPath: 'polygon(0% 100%, 0% 50%, 8% 47%, 15% 54%, 23% 45%, 30% 56%, 38% 48%, 45% 57%, 53% 44%, 60% 58%, 68% 46%, 75% 59%, 83% 49%, 90% 60%, 100% 50%, 100% 100%)'
-          }}
-          animate={{
-            x: [0, 0.5, -0.5, 0],
-            scaleX: [1, 1.002, 0.998, 1]
-          }}
-          transition={{
-            duration: 3.2,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1.8
-          }}
-        />
-
-        {/* Grass layer 6 - top layer */}
-        <motion.div 
-          className="absolute bottom-0 left-0 w-full h-1/3"
-          style={{
-            background: 'linear-gradient(to top, #6a9c6a, #7aaa7a)',
-            clipPath: 'polygon(0% 100%, 0% 60%, 10% 57%, 20% 64%, 30% 55%, 40% 66%, 50% 58%, 60% 67%, 70% 56%, 80% 68%, 90% 59%, 100% 60%, 100% 100%)'
-          }}
-          animate={{
-            x: [0, -0.3, 0.3, 0],
-            scaleX: [1, 1.001, 0.999, 1]
-          }}
-          transition={{
-            duration: 2.5,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 2.5
-          }}
-        />
-
-        {/* Grass layer 7 - very front layer */}
-        <motion.div 
-          className="absolute bottom-0 left-0 w-full h-1/4"
-          style={{
-            background: 'linear-gradient(to top, #7aac7a, #8aba8a)',
-            clipPath: 'polygon(0% 100%, 0% 70%, 12% 68%, 25% 73%, 37% 66%, 50% 74%, 62% 65%, 75% 75%, 87% 67%, 100% 74%, 100% 100%)'
-          }}
-          animate={{
-            x: [0, 0.2, -0.2, 0],
-            scaleX: [1, 1.0008, 0.9992, 1]
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 3
-          }}
-        />
-
-        {/* Grass layer 8 - topmost highlights */}
-        <motion.div 
-          className="absolute bottom-0 left-0 w-full h-1/6"
-          style={{
-            background: 'linear-gradient(to top, #8abc8a, #9aca9a)',
-            clipPath: 'polygon(0% 100%, 0% 80%, 16% 78%, 33% 83%, 50% 77%, 66% 84%, 83% 76%, 100% 80%, 100% 100%)'
-          }}
-          animate={{
-            x: [0, -0.1, 0.1, 0],
-            scaleX: [1, 1.0005, 0.9995, 1]
-          }}
-          transition={{
-            duration: 1.8,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 3.5
-          }}
-        />
-
-        {/* Grass layer 9 - extra coverage for black spots */}
-        <motion.div 
-          className="absolute bottom-0 left-0 w-full h-72 -z-10"
-          style={{
-            background: 'linear-gradient(to top,rgb(84, 153, 84),rgb(88, 153, 88))',
-            clipPath: 'polygon(0% 100%, 0% 50%, 20% 49%, 100% 51%, 60% 49%, 100% 51%, 100% 100%, 100% 100%)'
-          }}
-          animate={{
-            x: [0, 0.05, -0.05, 0],
-            scaleX: [1, 1.0003, 0.9997, 1]
-          }}
-          transition={{
-            duration: 1.5,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 4
-          }}
-        />
-        
       </div>
 
     </div>
