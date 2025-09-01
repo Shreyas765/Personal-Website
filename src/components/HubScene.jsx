@@ -341,7 +341,7 @@ const HubScene = ({ onSectionOpen, score, hasWon }) => {
         </motion.div>
       </div>
 
-      {/* Futuristic Sponsor Board - Professional Roles */}
+      {/* Futuristic Tech Stack Carousel */}
       <div className="absolute bottom-60 left-0 w-full z-10 overflow-hidden">
         <motion.div
           className="flex items-center h-28 relative"
@@ -358,55 +358,170 @@ const HubScene = ({ onSectionOpen, score, hasWon }) => {
             repeatType: "loop"
           }}
         >
-          {/* Sponsor sections with futuristic glass-morphism styling */}
+          {/* Tech stack sections with futuristic glass-morphism styling */}
           {Array.from({ length: 20 }, (_, i) => [
             { 
-              title: 'SOFTWARE', 
-              subtitle: 'DESIGNER', 
+              title: 'REACT', 
+              subtitle: 'FRONTEND', 
               accentColor: 'cyan',
               gradientFrom: 'from-cyan-500/20',
               gradientTo: 'to-blue-500/20',
               borderColor: 'border-cyan-400/40',
               glowColor: 'shadow-cyan-500/30',
-              textAccent: 'text-cyan-400'
+              textAccent: 'text-cyan-400',
+              logo: '/Pictures/react-2.svg'
             },
             { 
-              title: 'AI/ML', 
-              subtitle: 'RESEARCHER', 
-              accentColor: 'purple',
-              gradientFrom: 'from-purple-500/20',
-              gradientTo: 'to-violet-500/20',
-              borderColor: 'border-purple-400/40',
-              glowColor: 'shadow-purple-500/30',
-              textAccent: 'text-purple-400'
+              title: 'NEXT.JS', 
+              subtitle: 'FRAMEWORK', 
+              accentColor: 'slate',
+              gradientFrom: 'from-slate-500/20',
+              gradientTo: 'to-gray-500/20',
+              borderColor: 'border-slate-400/40',
+              glowColor: 'shadow-slate-500/30',
+              textAccent: 'text-slate-300',
+              logo: '/Pictures/next-js.svg'
             },
             { 
-              title: 'SOFTWARE', 
-              subtitle: 'ENGINEER', 
+              title: 'PYTHON', 
+              subtitle: 'AI/ML', 
+              accentColor: 'yellow',
+              gradientFrom: 'from-yellow-500/20',
+              gradientTo: 'to-amber-500/20',
+              borderColor: 'border-yellow-400/40',
+              glowColor: 'shadow-yellow-500/30',
+              textAccent: 'text-yellow-400',
+              logo: '/Pictures/python-5.svg'
+            },
+            { 
+              title: 'GIT', 
+              subtitle: 'VERSION CONTROL', 
+              accentColor: 'orange',
+              gradientFrom: 'from-orange-500/20',
+              gradientTo: 'to-red-500/20',
+              borderColor: 'border-orange-400/40',
+              glowColor: 'shadow-orange-500/30',
+              textAccent: 'text-orange-400',
+              logo: '/Pictures/git-icon.svg'
+            },
+            { 
+              title: 'JAVA', 
+              subtitle: 'LANGUAGE', 
+              accentColor: 'red',
+              gradientFrom: 'from-red-500/20',
+              gradientTo: 'to-orange-500/20',
+              borderColor: 'border-red-400/40',
+              glowColor: 'shadow-red-500/30',
+              textAccent: 'text-red-400',
+              logo: '/Pictures/java.svg'
+            },
+            { 
+              title: 'DOCKER', 
+              subtitle: 'DEVOPS', 
+              accentColor: 'blue',
+              gradientFrom: 'from-blue-500/20',
+              gradientTo: 'to-sky-500/20',
+              borderColor: 'border-blue-400/40',
+              glowColor: 'shadow-blue-500/30',
+              textAccent: 'text-blue-400',
+              logo: '/Pictures/docker.svg'
+            },
+            { 
+              title: 'PYTORCH', 
+              subtitle: 'AI/ML', 
+              accentColor: 'orange',
+              gradientFrom: 'from-orange-500/20',
+              gradientTo: 'to-red-500/20',
+              borderColor: 'border-orange-400/40',
+              glowColor: 'shadow-orange-500/30',
+              textAccent: 'text-orange-400',
+              logo: '/Pictures/pytorch-2.svg'
+            },
+            { 
+              title: 'MONGODB', 
+              subtitle: 'DATABASE', 
               accentColor: 'emerald',
               gradientFrom: 'from-emerald-500/20',
               gradientTo: 'to-green-500/20',
               borderColor: 'border-emerald-400/40',
               glowColor: 'shadow-emerald-500/30',
-              textAccent: 'text-emerald-400'
+              textAccent: 'text-emerald-400',
+              logo: '/Pictures/mongodb-icon-1.svg'
+            },
+            { 
+              title: 'TAILWINDCSS', 
+              subtitle: 'STYLING', 
+              accentColor: 'teal',
+              gradientFrom: 'from-teal-500/20',
+              gradientTo: 'to-cyan-500/20',
+              borderColor: 'border-teal-400/40',
+              glowColor: 'shadow-teal-500/30',
+              textAccent: 'text-teal-400',
+              logo: '/Pictures/tailwind-css-2.svg'
+            },
+            { 
+              title: 'GOOGLE CLOUD', 
+              subtitle: 'PLATFORM', 
+              accentColor: 'blue',
+              gradientFrom: 'from-blue-500/20',
+              gradientTo: 'to-indigo-500/20',
+              borderColor: 'border-blue-400/40',
+              glowColor: 'shadow-blue-500/30',
+              textAccent: 'text-blue-400',
+              logo: '/Pictures/google_cloud.svg'
+            },
+            { 
+              title: 'AWS', 
+              subtitle: 'CLOUD', 
+              accentColor: 'orange',
+              gradientFrom: 'from-orange-500/20',
+              gradientTo: 'to-yellow-500/20',
+              borderColor: 'border-orange-400/40',
+              glowColor: 'shadow-orange-500/30',
+              textAccent: 'text-orange-400',
+              logo: '/Pictures/aws-2.svg'
+            },
+            { 
+              title: 'POSTGRESQL', 
+              subtitle: 'DATABASE', 
+              accentColor: 'indigo',
+              gradientFrom: 'from-indigo-500/20',
+              gradientTo: 'to-blue-500/20',
+              borderColor: 'border-indigo-400/40',
+              glowColor: 'shadow-indigo-500/30',
+              textAccent: 'text-indigo-400',
+              logo: '/Pictures/postgresql.svg'
             }
-          ]).flat().map((sponsor, index) => (
+          ]).flat().map((tech, index) => (
             <motion.div 
               key={index}
-                             className={`relative flex flex-col items-center justify-center px-8 h-full bg-gradient-to-br from-slate-900/80 via-slate-800/60 to-slate-900/80 backdrop-blur-lg border-r border-white/10 overflow-hidden`}
-               style={{ 
-                 minWidth: '280px',
+              className={`relative flex flex-col items-center justify-center px-8 h-full bg-gradient-to-br from-slate-900/80 via-slate-800/60 to-slate-900/80 backdrop-blur-lg border-r border-white/10 overflow-hidden`}
+              style={{ 
+                minWidth: '280px',
                 boxShadow: `0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.1)`
               }}
               whileHover={{
                 scale: 1.02,
-                boxShadow: `0 12px 40px rgba(0, 0, 0, 0.4), 0 0 20px ${sponsor.accentColor === 'cyan' ? 'rgba(34, 211, 238, 0.3)' : sponsor.accentColor === 'purple' ? 'rgba(147, 51, 234, 0.3)' : 'rgba(16, 185, 129, 0.3)'}, inset 0 1px 0 rgba(255, 255, 255, 0.2)`
+                                 boxShadow: `0 12px 40px rgba(0, 0, 0, 0.4), 0 0 20px ${
+                   tech.accentColor === 'cyan' ? 'rgba(34, 211, 238, 0.3)' : 
+                   tech.accentColor === 'slate' ? 'rgba(148, 163, 184, 0.3)' :
+                   tech.accentColor === 'green' ? 'rgba(34, 197, 94, 0.3)' :
+                   tech.accentColor === 'yellow' ? 'rgba(234, 179, 8, 0.3)' :
+                   tech.accentColor === 'blue' ? 'rgba(59, 130, 246, 0.3)' :
+                   tech.accentColor === 'red' ? 'rgba(239, 68, 68, 0.3)' :
+                   tech.accentColor === 'orange' ? 'rgba(249, 115, 22, 0.3)' :
+                   tech.accentColor === 'emerald' ? 'rgba(16, 185, 129, 0.3)' :
+                   tech.accentColor === 'teal' ? 'rgba(20, 184, 166, 0.3)' :
+                   tech.accentColor === 'indigo' ? 'rgba(99, 102, 241, 0.3)' :
+                   tech.accentColor === 'purple' ? 'rgba(147, 51, 234, 0.3)' :
+                   'rgba(147, 51, 234, 0.3)'
+                 }, inset 0 1px 0 rgba(255, 255, 255, 0.2)`
               }}
               transition={{ duration: 0.3 }}
             >
               {/* Animated background glow */}
               <motion.div 
-                className={`absolute inset-0 bg-gradient-to-br ${sponsor.gradientFrom} ${sponsor.gradientTo} opacity-0`}
+                className={`absolute inset-0 bg-gradient-to-br ${tech.gradientFrom} ${tech.gradientTo} opacity-0`}
                 animate={{
                   opacity: [0, 0.6, 0]
                 }}
@@ -420,7 +535,7 @@ const HubScene = ({ onSectionOpen, score, hasWon }) => {
               
               {/* Animated border accent */}
               <motion.div 
-                className={`absolute inset-0 border ${sponsor.borderColor} rounded-sm`}
+                className={`absolute inset-0 border ${tech.borderColor} rounded-sm`}
                 animate={{
                   borderOpacity: [0.2, 0.8, 0.2]
                 }}
@@ -434,16 +549,80 @@ const HubScene = ({ onSectionOpen, score, hasWon }) => {
               
               {/* Content */}
               <div className="relative z-10 flex flex-col items-center">
-                                 <motion.span 
-                   className={`${sponsor.textAccent} font-black text-2xl tracking-[0.15em] mb-2 relative`}
+                {/* Logo */}
+                <div className="w-12 h-12 mb-3 flex items-center justify-center filter drop-shadow-lg">
+                  <img 
+                    src={tech.logo} 
+                    alt={`${tech.title} logo`}
+                    className="w-full h-full object-contain"
+                    style={{
+                      filter: 'brightness(0) saturate(100%) invert(100%)'
+                    }}
+                  />
+                </div>
+                
+                                <motion.span 
+                  className={`${tech.textAccent} font-black text-2xl tracking-[0.15em] relative`}
                   style={{
-                    textShadow: `0 0 10px ${sponsor.accentColor === 'cyan' ? 'rgba(34, 211, 238, 0.5)' : sponsor.accentColor === 'purple' ? 'rgba(147, 51, 234, 0.5)' : 'rgba(16, 185, 129, 0.5)'}, 0 2px 4px rgba(0, 0, 0, 0.8)`
+                    textShadow: `0 0 10px ${
+                      tech.accentColor === 'cyan' ? 'rgba(34, 211, 238, 0.5)' :
+                      tech.accentColor === 'slate' ? 'rgba(148, 163, 184, 0.5)' :
+                      tech.accentColor === 'green' ? 'rgba(34, 197, 94, 0.5)' :
+                      tech.accentColor === 'yellow' ? 'rgba(234, 179, 8, 0.5)' :
+                      tech.accentColor === 'blue' ? 'rgba(59, 130, 246, 0.5)' :
+                      tech.accentColor === 'red' ? 'rgba(239, 68, 68, 0.5)' :
+                      tech.accentColor === 'orange' ? 'rgba(249, 115, 22, 0.5)' :
+                      tech.accentColor === 'emerald' ? 'rgba(16, 185, 129, 0.5)' :
+                      tech.accentColor === 'teal' ? 'rgba(20, 184, 166, 0.5)' :
+                      tech.accentColor === 'indigo' ? 'rgba(99, 102, 241, 0.5)' :
+                      tech.accentColor === 'purple' ? 'rgba(147, 51, 234, 0.5)' :
+                      'rgba(147, 51, 234, 0.5)'
+                    }, 0 2px 4px rgba(0, 0, 0, 0.8)`
                   }}
                   animate={{
                     textShadow: [
-                      `0 0 5px ${sponsor.accentColor === 'cyan' ? 'rgba(34, 211, 238, 0.3)' : sponsor.accentColor === 'purple' ? 'rgba(147, 51, 234, 0.3)' : 'rgba(16, 185, 129, 0.3)'}, 0 2px 4px rgba(0, 0, 0, 0.8)`,
-                      `0 0 15px ${sponsor.accentColor === 'cyan' ? 'rgba(34, 211, 238, 0.8)' : sponsor.accentColor === 'purple' ? 'rgba(147, 51, 234, 0.8)' : 'rgba(16, 185, 129, 0.8)'}, 0 2px 4px rgba(0, 0, 0, 0.8)`,
-                      `0 0 5px ${sponsor.accentColor === 'cyan' ? 'rgba(34, 211, 238, 0.3)' : sponsor.accentColor === 'purple' ? 'rgba(147, 51, 234, 0.3)' : 'rgba(16, 185, 129, 0.3)'}, 0 2px 4px rgba(0, 0, 0, 0.8)`
+                      `0 0 5px ${
+                        tech.accentColor === 'cyan' ? 'rgba(34, 211, 238, 0.3)' :
+                        tech.accentColor === 'slate' ? 'rgba(148, 163, 184, 0.3)' :
+                        tech.accentColor === 'green' ? 'rgba(34, 197, 94, 0.3)' :
+                        tech.accentColor === 'yellow' ? 'rgba(234, 179, 8, 0.3)' :
+                        tech.accentColor === 'blue' ? 'rgba(59, 130, 246, 0.3)' :
+                        tech.accentColor === 'red' ? 'rgba(239, 68, 68, 0.3)' :
+                        tech.accentColor === 'orange' ? 'rgba(249, 115, 22, 0.3)' :
+                        tech.accentColor === 'emerald' ? 'rgba(16, 185, 129, 0.3)' :
+                        tech.accentColor === 'teal' ? 'rgba(20, 184, 166, 0.3)' :
+                        tech.accentColor === 'indigo' ? 'rgba(99, 102, 241, 0.3)' :
+                        tech.accentColor === 'purple' ? 'rgba(147, 51, 234, 0.3)' :
+                        'rgba(147, 51, 234, 0.3)'
+                      }, 0 2px 4px rgba(0, 0, 0, 0.8)`,
+                      `0 0 15px ${
+                        tech.accentColor === 'cyan' ? 'rgba(34, 211, 238, 0.8)' :
+                        tech.accentColor === 'slate' ? 'rgba(148, 163, 184, 0.8)' :
+                        tech.accentColor === 'green' ? 'rgba(34, 197, 94, 0.8)' :
+                        tech.accentColor === 'yellow' ? 'rgba(234, 179, 8, 0.8)' :
+                        tech.accentColor === 'blue' ? 'rgba(59, 130, 246, 0.8)' :
+                        tech.accentColor === 'red' ? 'rgba(239, 68, 68, 0.8)' :
+                        tech.accentColor === 'orange' ? 'rgba(249, 115, 22, 0.8)' :
+                        tech.accentColor === 'emerald' ? 'rgba(16, 185, 129, 0.8)' :
+                        tech.accentColor === 'teal' ? 'rgba(20, 184, 166, 0.8)' :
+                        tech.accentColor === 'indigo' ? 'rgba(99, 102, 241, 0.8)' :
+                        tech.accentColor === 'purple' ? 'rgba(147, 51, 234, 0.8)' :
+                        'rgba(147, 51, 234, 0.8)'
+                      }, 0 2px 4px rgba(0, 0, 0, 0.8)`,
+                      `0 0 5px ${
+                        tech.accentColor === 'cyan' ? 'rgba(34, 211, 238, 0.3)' :
+                        tech.accentColor === 'slate' ? 'rgba(148, 163, 184, 0.3)' :
+                        tech.accentColor === 'green' ? 'rgba(34, 197, 94, 0.3)' :
+                        tech.accentColor === 'yellow' ? 'rgba(234, 179, 8, 0.3)' :
+                        tech.accentColor === 'blue' ? 'rgba(59, 130, 246, 0.3)' :
+                        tech.accentColor === 'red' ? 'rgba(239, 68, 68, 0.3)' :
+                        tech.accentColor === 'orange' ? 'rgba(249, 115, 22, 0.3)' :
+                        tech.accentColor === 'emerald' ? 'rgba(16, 185, 129, 0.3)' :
+                        tech.accentColor === 'teal' ? 'rgba(20, 184, 166, 0.3)' :
+                        tech.accentColor === 'indigo' ? 'rgba(99, 102, 241, 0.3)' :
+                        tech.accentColor === 'purple' ? 'rgba(147, 51, 234, 0.3)' :
+                        'rgba(147, 51, 234, 0.3)'
+                      }, 0 2px 4px rgba(0, 0, 0, 0.8)`
                     ]
                   }}
                   transition={{
@@ -453,13 +632,8 @@ const HubScene = ({ onSectionOpen, score, hasWon }) => {
                     delay: index * 0.15
                   }}
                 >
-                  {sponsor.title}
+                  {tech.title}
                 </motion.span>
-                                 <span className="text-white/90 font-bold text-xl tracking-[0.1em] relative" style={{
-                  textShadow: '0 2px 8px rgba(0, 0, 0, 0.8)'
-                }}>
-                  {sponsor.subtitle}
-                </span>
               </div>
               
               {/* Subtle particle effect */}
