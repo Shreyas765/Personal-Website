@@ -53,15 +53,22 @@ const HubScene = ({ onSectionOpen, score, hasWon, showConfetti, selectedSection 
     }
   }, [showWelcomePopup])
 
-  // Calculate positions for the four nodes in corners
-  const getNodePosition = (index, total = 4) => {
-    const positions = [
-      { x: -520, y: -260 }, // Top left - Experience
-      { x: 375, y: -260 },  // Top right - Projects
-      { x: -520, y: 115 },  // Bottom left - Tech Stack
-      { x: 375, y: 115 }    // Bottom right - Education  
+  // Calculate positions for the four nodes relative to goal bounds
+  // These positions are percentages of the goal width/height
+  const getNodePosition = (index, goalBounds) => {
+    const relativePositions = [
+      { x: 0.05, y: 0.25 }, // Top left - Experience (5% from left, 25% from top) - moved left by ~100px
+      { x: 0.85, y: 0.25 }, // Top right - Projects (85% from left, 25% from top)
+      { x: 0.05, y: 0.75 }, // Bottom left - Accolades (5% from left, 75% from top) - moved left by ~100px
+      { x: 0.85, y: 0.75 }  // Bottom right - Education (85% from left, 75% from top)
     ]
-    return positions[index] || { x: 0, y: 0 }
+    
+    const relativePos = relativePositions[index] || { x: 0.5, y: 0.5 }
+    
+    return {
+      x: goalBounds.x + (relativePos.x * goalBounds.width) - goalBounds.width / 2,
+      y: goalBounds.y + (relativePos.y * goalBounds.height) - goalBounds.height / 2
+    }
   }
 
   // Handle node clicks with ball animation
@@ -74,8 +81,33 @@ const HubScene = ({ onSectionOpen, score, hasWon, showConfetti, selectedSection 
     if (sectionId === 'about') {
       targetPosition = { x: 0, y: 0 } // Center position
     } else {
-      const sectionIndex = sections.findIndex(s => s.id === sectionId)
-      targetPosition = getNodePosition(sectionIndex)
+      // Get current goal bounds for responsive positioning
+      const goalElement = document.querySelector('[data-goal-container]')
+      if (goalElement) {
+        const rect = goalElement.getBoundingClientRect()
+        const centerX = window.innerWidth / 2
+        const centerY = window.innerHeight / 2
+        
+        const goalBounds = {
+          x: rect.left + rect.width / 2 - centerX,
+          y: rect.top + rect.height / 2 - centerY,
+          width: rect.width,
+          height: rect.height
+        }
+        
+        const sectionIndex = sections.findIndex(s => s.id === sectionId)
+        targetPosition = getNodePosition(sectionIndex, goalBounds)
+      } else {
+        // Fallback to old positioning if goal element not found
+        const sectionIndex = sections.findIndex(s => s.id === sectionId)
+        const fallbackPositions = [
+          { x: -520, y: -260 }, // Top left - Experience
+          { x: 375, y: -260 },  // Top right - Projects
+          { x: -520, y: 115 },  // Bottom left - Tech Stack
+          { x: 375, y: 115 }    // Bottom right - Education  
+        ]
+        targetPosition = fallbackPositions[sectionIndex] || { x: 0, y: 0 }
+      }
     }
     
     setBallAnimation({ targetId: sectionId, targetPosition })
@@ -86,6 +118,127 @@ const HubScene = ({ onSectionOpen, score, hasWon, showConfetti, selectedSection 
       setIsAnimating(false)
       onSectionOpen(sectionId)
     }, 1200) // Animation duration + small delay
+  }
+
+  // Unified Goal with Nodes Component
+  const GoalWithNodes = () => {
+    const [goalBounds, setGoalBounds] = useState({ x: 0, y: 0, width: 1100, height: 575 })
+    
+    useEffect(() => {
+      const updateGoalBounds = () => {
+        const goalElement = document.querySelector('[data-goal-container]')
+        if (goalElement) {
+          const rect = goalElement.getBoundingClientRect()
+          const centerX = window.innerWidth / 2
+          const centerY = window.innerHeight / 2
+          
+          setGoalBounds({
+            x: rect.left + rect.width / 2 - centerX,
+            y: rect.top + rect.height / 2 - centerY,
+            width: rect.width,
+            height: rect.height
+          })
+        }
+      }
+      
+      updateGoalBounds()
+      window.addEventListener('resize', updateGoalBounds)
+      return () => window.removeEventListener('resize', updateGoalBounds)
+    }, [])
+
+    return (
+      <div className="absolute bottom-56 left-1/2 transform -translate-x-1/2" style={{ zIndex: 20 }}>
+        {/* Goal Container */}
+        <div 
+          data-goal-container
+          className="relative w-[min(1100px,80vw)] h-[575px]"
+          style={{ 
+            aspectRatio: '1100/575',
+            maxWidth: '80vw',
+            height: 'auto',
+            minHeight: '400px'
+          }}
+        >
+          {/* Goal frame - main structure */}
+          <div className="absolute inset-0">
+            {/* Left post */}
+            <div className="absolute left-0 top-0 w-1 h-full bg-white shadow-lg" style={{
+              background: 'linear-gradient(to right, #ffffff, #f8f9fa)',
+              boxShadow: '4px 0 12px rgba(0, 0, 0, 0.4)',
+              width: 'max(4px, 0.4%)'
+            }}></div>
+            
+            {/* Right post */}
+            <div className="absolute right-0 top-0 w-1 h-full bg-white shadow-lg" style={{
+              background: 'linear-gradient(to left, #ffffff, #f8f9fa)',
+              boxShadow: '-4px 0 12px rgba(0, 0, 0, 0.4)',
+              width: 'max(4px, 0.4%)'
+            }}></div>
+            
+            {/* Top crossbar */}
+            <div className="absolute top-0 left-0 w-full h-1 bg-white shadow-lg" style={{
+              background: 'linear-gradient(to bottom, #ffffff, #f8f9fa)',
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.4)',
+              height: 'max(4px, 0.7%)'
+            }}></div>
+            
+            {/* Goal net pattern - more realistic */}
+            <div 
+              className="absolute inset-0 opacity-50"
+              style={{
+                backgroundImage: `
+                  linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.5) 2px, transparent 4px),
+                  linear-gradient(0deg, transparent 0%, rgba(255,255,255,0.5) 2px, transparent 4px)
+                `,
+                backgroundSize: 'max(20px, 2%) max(20px, 3.5%)',
+              }}
+            ></div>
+          </div>
+
+          {/* Nodes positioned relative to goal bounds */}
+          {sections.map((section, index) => {
+            const relativePositions = [
+              { x: 0.03, y: 0.05 }, // Top left - Experience (moved left from 0.15 to 0.05)
+              { x: 0.85, y: 0.05 }, // Top right - Projects  
+              { x: 0.03, y: 0.75 }, // Bottom left - Accolades (moved left from 0.15 to 0.05)
+              { x: 0.85, y: 0.75 }  // Bottom right - Education
+            ]
+            
+            const relativePos = relativePositions[index] || { x: 0.5, y: 0.5 }
+            
+            return (
+              <motion.div
+                key={section.id}
+                className="absolute transform -translate-x-1/2 -translate-y-1/2 z-30"
+                style={{
+                  left: `${relativePos.x * 100}%`,
+                  top: `${relativePos.y * 100}%`,
+                }}
+                initial={{ 
+                  opacity: 0,
+                  scale: 0
+                }}
+                animate={{ 
+                  opacity: 1,
+                  scale: 1
+                }}
+                transition={{ 
+                  delay: index * 0.1,
+                  duration: 0.8,
+                  ease: "easeOut"
+                }}
+              >
+                <NodeBubble
+                  section={section}
+                  onClick={() => handleNodeClick(section.id)}
+                  disabled={isAnimating}
+                />
+              </motion.div>
+            )
+          })}
+        </div>
+      </div>
+    )
   }
 
   // Soccer Ball Component
@@ -115,7 +268,7 @@ const HubScene = ({ onSectionOpen, score, hasWon, showConfetti, selectedSection 
           scale: { times: [0, 0.5, 1] }
         }}
       >
-                <div className="w-20 h-20 rounded-full overflow-hidden">
+        <div className="w-20 h-20 rounded-full overflow-hidden">
           <img 
             src="/Pictures/soccerball.png" 
             alt="Soccer Ball" 
@@ -780,39 +933,8 @@ const HubScene = ({ onSectionOpen, score, hasWon, showConfetti, selectedSection 
         </motion.button>
       </div>
 
-      {/* Orbiting Nodes */}
-      {sections.map((section, index) => {
-        const position = getNodePosition(index)
-        return (
-          <motion.div
-            key={section.id}
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30"
-            initial={{ 
-              x: position.x, 
-              y: position.y,
-              opacity: 0,
-              scale: 0
-            }}
-            animate={{ 
-              x: position.x, 
-              y: position.y,
-              opacity: 1,
-              scale: 1
-            }}
-            transition={{ 
-              delay: index * 0.1,
-              duration: 0.8,
-              ease: "easeOut"
-            }}
-          >
-            <NodeBubble
-              section={section}
-              onClick={() => handleNodeClick(section.id)}
-              disabled={isAnimating}
-            />
-          </motion.div>
-        )
-      })}
+      {/* Unified Goal with Nodes Component */}
+      <GoalWithNodes />
 
       {/* Soccer Ball */}
       <SoccerBall 
@@ -820,40 +942,6 @@ const HubScene = ({ onSectionOpen, score, hasWon, showConfetti, selectedSection 
         targetPosition={ballAnimation?.targetPosition || ballStartPosition}
         isAnimating={isAnimating && ballAnimation}
       />
-
-      {/* Soccer Goal - Realistic Position */}
-      {/* Goal frame - main structure */}
-      <div className="absolute bottom-56 left-1/2 transform -translate-x-1/2 w-[1100px] h-[575px] z-20">
-        {/* Left post */}
-        <div className="absolute left-0 top-0 w-4 h-full bg-white shadow-lg" style={{
-          background: 'linear-gradient(to right, #ffffff, #f8f9fa)',
-          boxShadow: '4px 0 12px rgba(0, 0, 0, 0.4)'
-        }}></div>
-        
-        {/* Right post */}
-        <div className="absolute right-0 top-0 w-4 h-full bg-white shadow-lg" style={{
-          background: 'linear-gradient(to left, #ffffff, #f8f9fa)',
-          boxShadow: '-4px 0 12px rgba(0, 0, 0, 0.4)'
-        }}></div>
-        
-        {/* Top crossbar */}
-        <div className="absolute top-0 left-0 w-full h-4 bg-white shadow-lg" style={{
-          background: 'linear-gradient(to bottom, #ffffff, #f8f9fa)',
-          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.4)'
-        }}></div>
-        
-        {/* Goal net pattern - more realistic */}
-        <div 
-          className="absolute inset-0 opacity-50"
-          style={{
-            backgroundImage: `
-              linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.5) 2px, transparent 4px),
-              linear-gradient(0deg, transparent 0%, rgba(255,255,255,0.5) 2px, transparent 4px)
-            `,
-            backgroundSize: '20px 20px',
-          }}
-        ></div>
-      </div>
 
       {/* Goal Line - Full Width */}
       <div className="absolute bottom-56 left-0 w-full h-1 bg-white shadow-lg" style={{ zIndex: 2 }}></div>
