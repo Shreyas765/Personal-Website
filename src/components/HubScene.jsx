@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { FileText, Mail, Github, Linkedin } from 'lucide-react'
 import Scoreboard from './Scoreboard'
 import NodeBubble from './NodeBubble'
 import { sections } from '../data/sections'
 
-const HubScene = ({ onSectionOpen, score, hasWon }) => {
+const HubScene = ({ onSectionOpen, score, hasWon, showConfetti, selectedSection }) => {
   const [isFirstVisit, setIsFirstVisit] = useState(false)
   const [showWelcomePopup, setShowWelcomePopup] = useState(true)
   const [ballAnimation, setBallAnimation] = useState(null) // { targetId, targetPosition }
@@ -348,12 +348,14 @@ const HubScene = ({ onSectionOpen, score, hasWon }) => {
           style={{ 
             width: 'max-content'
           }}
-          animate={{
+          animate={selectedSection ? {
+            x: '0%' // Pause animation when detail card is open
+          } : {
             x: ['0%', '-15%']
           }}
           transition={{
-            duration: 60,
-            repeat: Infinity,
+            duration: selectedSection ? 0 : 120,
+            repeat: selectedSection ? 0 : Infinity,
             ease: "linear",
             repeatType: "loop"
           }}
@@ -491,6 +493,17 @@ const HubScene = ({ onSectionOpen, score, hasWon }) => {
               glowColor: 'shadow-indigo-500/30',
               textAccent: 'text-indigo-400',
               logo: '/Pictures/postgresql.svg'
+            },
+            { 
+              title: 'C++', 
+              subtitle: 'LANGUAGE', 
+              accentColor: 'blue',
+              gradientFrom: 'from-blue-500/20',
+              gradientTo: 'to-indigo-500/20',
+              borderColor: 'border-blue-400/40',
+              glowColor: 'shadow-blue-500/30',
+              textAccent: 'text-blue-400',
+              logo: '/Pictures/c.svg'
             }
           ]).flat().map((tech, index) => (
             <motion.div 
@@ -551,14 +564,20 @@ const HubScene = ({ onSectionOpen, score, hasWon }) => {
               <div className="relative z-10 flex flex-col items-center">
                 {/* Logo */}
                 <div className="w-12 h-12 mb-3 flex items-center justify-center filter drop-shadow-lg">
-                  <img 
-                    src={tech.logo} 
-                    alt={`${tech.title} logo`}
-                    className="w-full h-full object-contain"
-                    style={{
-                      filter: 'brightness(0) saturate(100%) invert(100%)'
-                    }}
-                  />
+                  {tech.logo.startsWith('/Pictures/') ? (
+                    <img 
+                      src={tech.logo} 
+                      alt={`${tech.title} logo`}
+                      className="w-full h-full object-contain"
+                      style={{
+                        filter: 'brightness(0) saturate(100%) invert(100%)'
+                      }}
+                    />
+                  ) : (
+                    <div className="text-4xl">
+                      {tech.logo}
+                    </div>
+                  )}
                 </div>
                 
                                 <motion.span 
@@ -873,19 +892,59 @@ const HubScene = ({ onSectionOpen, score, hasWon }) => {
         </div>
       </div>
 
-      {/* Win Celebration CTA */}
-      {hasWon && (
-        <motion.div
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1, duration: 0.5 }}
-        >
-          <button className="px-6 py-3 bg-emerald-500 hover:bg-emerald-600 rounded-full text-white font-semibold shadow-lg transition-all duration-200 hover:scale-105">
-            View Résumé
-          </button>
-        </motion.div>
-      )}
+
+
+      {/* Full Screen Confetti Drop */}
+      <AnimatePresence>
+        {showConfetti && (
+          <motion.div
+            className="fixed inset-0 pointer-events-none z-50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+                     {[...Array(60)].map((_, i) => {
+            const colors = [
+              'bg-yellow-400', 'bg-cyan-400', 'bg-purple-400', 'bg-emerald-400', 
+              'bg-orange-400', 'bg-pink-400', 'bg-blue-400', 'bg-red-400',
+              'bg-green-400', 'bg-indigo-400'
+            ];
+            const shapes = ['rounded-full', 'rounded-sm', 'rounded-md', 'rounded-none'];
+                         const sizes = ['w-2 h-2', 'w-3 h-3', 'w-4 h-4', 'w-2 h-4', 'w-4 h-2', 'w-3 h-5'];
+            
+            return (
+              <motion.div
+                key={`confetti-drop-${i}`}
+                                 className={`absolute ${colors[i % colors.length]} ${shapes[i % shapes.length]} ${sizes[i % sizes.length]} shadow-lg`}
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: '-50px'
+                }}
+                initial={{ 
+                  y: -50,
+                  x: 0,
+                  opacity: 0,
+                  rotate: Math.random() * 360,
+                  scale: 0
+                }}
+                animate={{ 
+                  y: window.innerHeight + 100,
+                  x: (Math.random() - 0.5) * 300,
+                  opacity: [0, 1, 1, 0.8, 0],
+                  rotate: Math.random() * 1440 + 360, // 2-4 full rotations
+                  scale: [0, 1.2, 1, 0.8, 0.3]
+                }}
+                                 transition={{ 
+                   duration: Math.random() * 3 + 4, // 4-7 seconds fall time
+                   delay: Math.random() * 2, // Stagger over 2 seconds
+                   ease: [0.25, 0.1, 0.25, 1] // Gravity-like easing
+                 }}
+              />
+            );
+                     })}
+         </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Welcome Notification */}
       {showWelcomePopup && (

@@ -8,15 +8,19 @@ function App() {
   const [selectedSection, setSelectedSection] = useState(null)
   const [score, setScore] = useState(0)
   const [hasWon, setHasWon] = useState(false)
+  const [showConfetti, setShowConfetti] = useState(false)
 
   // Calculate score from opened sections
   useEffect(() => {
     const newScore = Object.values(openedSections).filter(Boolean).length
     setScore(newScore)
     
-    // Check win condition
-    if (newScore === 6 && !hasWon) {
+    // Check win condition - 5 sections total (4 data sections + about)
+    if (newScore === 5 && !hasWon) {
       setHasWon(true)
+      setShowConfetti(true)
+      // Hide confetti after 8 seconds
+      setTimeout(() => setShowConfetti(false), 8000)
     }
   }, [openedSections, hasWon])
 
@@ -42,6 +46,8 @@ function App() {
         onSectionOpen={handleSectionOpen}
         score={score}
         hasWon={hasWon}
+        showConfetti={showConfetti}
+        selectedSection={selectedSection}
       />
       
       {selectedSection && (
