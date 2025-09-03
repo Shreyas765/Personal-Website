@@ -56,4 +56,18 @@ jspm_packages/
 *.tgz
 
 # Yarn Integrity file
-.yarn-integrity 
+.yarn-integrity
+
+# Vercel
+.vercel
+
+# Package manager lock files (keep package-lock.json for consistency)
+# yarn.lock
+# pnpm-lock.yaml
+
+# Build artifacts and cache
+.cache/
+.parcel-cache/
+.next/
+.nuxt/
+.vuepress/dist/ 
