@@ -1,6 +1,7 @@
 {
   "name": "personal-website-mvp",
   "version": "1.0.0",
+  "type": "module",
   "description": "MVP Personal Website with Interactive Hub Scene",
   "main": "index.js",
   "engines": {
