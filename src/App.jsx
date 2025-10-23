@@ -179,10 +179,11 @@ function App() {
                     <Mail size={22} />
                   </a>
                   <a 
-                    href="/resume.pdf" 
-                    download
+                    href="/Shreyas_Arisa_Resume.pdf" 
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="p-3 bg-blue-900/50 hover:bg-blue-600 rounded-lg text-blue-200 hover:text-white transition-all hover:scale-110 transform hover:shadow-lg hover:shadow-blue-600/50"
-                    title="Download Resume"
+                    title="View Resume"
                   >
                     <FileText size={22} />
                   </a>
