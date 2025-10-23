@@ -1,71 +1,85 @@
 import { ConciergeBell } from "lucide-react"
 
 export const sections = [
+  {
+    id: "about",
+    title: "About Me",
+    cta: "Learn more",
+    content: {
+      bio: "Hey, I'm Shreyas! I'm a Computer Science student at Georgia Tech passionate about building impactful software solutions and AI powered applications.",
+      interests: ["Software Engineering", "Machine Learning Engineering", "Distributed Systems", "AI Research"],
+      currentFocus: "Currently working on protein structure analysis using deep learning at ARTISAN Research Lab"
+    }
+  },
   { 
     id: "experience", 
     title: "Experience", 
-    short: "TOP BINS!!!",
+    short: "Professional Work",
     cta: "View timeline",
     content: [
       {
-        title: "Software Engineering Intern",
-        company: "Narb.",
-        logo: "/Pictures/narbtechnology_logo.svg", //
-        period: "September 2025 - Present",
-        description: "Incoming Software Engineering Intern",
-        techStack: [],
-        achievements: [
-          
-        ]
-      },
-      {
-        title: "ML Researcher",
-        company: "Center for Artificial Intelligence in Science and Engineering (ARTISAN)",
-        logo: "/Pictures/GT_Computing.svg", // Updated to use GT.svg for GRAIT-DM
+        title: "ML Engineer - Undergraduate",
+        company: "ARTISAN Research Lab @Georgia Tech",
+        logo: "/Pictures/GT_Computing.svg",
         period: "May 2025 - Present",
-        description: "Building autoencoders to reproduce protein structures by compressing and regenerating AlphaFold2's Evoformer embeddings from OpenFold.",
-        techStack: ["Python", "PyTorch", "NumPy", "HPC", "NLP", "OpenFold", "scikit-learn"],
+        description: "Building autoencoders to reproduce protein structures by compressing and regenerating AlphaFold2's Evoformer embeddings.",
+        techStack: ["Python", "PyTorch", "Matplotlib", "scikit-learn", "HPC", "Distributed Systems"],
         achievements: [
-          "Engineered a Variational Autoencoder achieving 50% dimensionality reJduction with low reconstruction MSE: 0.03 across 180+ variable sized proteins of up to 638 residues",
-          "Built a framework to visualize protein structure preservation and family clustering through heatmaps and t-SNE with 90% noise reduction and 0.844 mean correlation between dimensions"
+          "Engineered an autoencoder in Python using PyTorch, achieving 50% dimensionality reduction with a low error of 0.03 on 180+ proteins from Google DeepMind's AlphaFold2 alongside Google Summer of Code Contributors",
+          "Built a framework using Matplotlib and scikit-learn to visualize protein structure preservation and family clustering through heatmaps and t-SNE with 90% noise reduction and 0.844 mean correlation between dimensions",
+          "Utilized distributed systems in High Performance Computing clusters to improve training time from 2 hours to 5 minutes"
         ]
       },
       {
-        title: "Software Engineer - Software Lead",
-        company: "Apache Airavata - Vertically Integrated Projects (VIP)",
-        logo: "/Pictures/VIP.svg", // Updated to use VIP.svg for Apache Airavata
-        period: "January 2025 - Present", 
-        description: "Leading scalable HPC and AI-driven solutions, integrating user-friendly interfaces with optimized resource management to accelerate research and data-intensive applications.",
-        techStack: ["Python", "Flask", "SLURM", "HPC", "NLP", "Docker"],
+        title: "CTO and Co-Founder",
+        company: "GiftSpark",
+        logo: "/Pictures/giftspark.svg",
+        period: "December 2024 - August 2025",
+        description: "Co-founded and led technical development of a B2B AI-powered gift recommendation platform backed by Create-X funding.",
+        techStack: ["TypeScript", "React", "Node.js", "MongoDB", "AWS PA API", "OpenAI API", "Google OAuth2.0", "SMTP"],
         achievements: [
-          "Contributed to a NSF/NASA-funded open-source project by integrating NLP pipelines with High Performance Computing (HPC)",
-          "Created a user-centric UI with Flask to upload and detect 650,000+ malicious URLs on Georgia Tech's ICE supercomputing-cluster",
-          "Automated SLURM job editing and resource allocation with a Python script, reducing detection time by 600%"
+          "Engineered a full-stack B2B platform using AWS Product Advertising API and OpenAI to generate personalized gift recommendations for 10,000+ employees with TypeScript and React with MongoDB for data modeling",
+          "Secured over $5000 in Create-X backed funding for software development and received interest from 20+ clients",
+          "Optimized RESTful API batch processing to reduce latency by 76% (21s to 5s) while maintaining AWS compliance",
+          "Implemented secure business-only authentication with Google OAuth2.0 and automated email delivery with SMTP"
         ]
       },
       {
-        title: "Software Engineering Intern",
-        company: "Kavi Media LLC",
-        logo: "/Pictures/KaviMedia.svg", // Updated to use KaviMedia.svg
-        period: "May 2024 - August 2024",
-        description: "Built scalable backend pipelines and user-facing mobile features to deliver personalized audio content recommendations and seamless multimedia experiences.",
-        techStack: ["React Native", "MariaDB", "ElasticSearch", "Gorse", "Node.js"],
+        title: "Software Engineer - Lead",
+        company: "Apache Airavata",
+        logo: "/Pictures/VIP.svg",
+        period: "January 2025 - May 2025", 
+        description: "Led a four-person engineering team on a NSF/NASA-funded project integrating NLP pipelines with High Performance Computing.",
+        techStack: ["Python", "Flask", "SLURM", "HPC", "Linux", "Agile"],
         achievements: [
-          "Designed scalable data ingestion pipeline processing 50k+ multimedia items for MariaDB and ElasticSearch",
-          "Developed UI for Radio and Podcast screens for a mobile audio app deployed for beta-testing using React Native",
-          "Worked on Gorse to power personalized content recs leading to a 1.5x recommendation click-through rate"
+          "Developed a Python pipeline to manage SLURM-based High Performance Computing workloads that improved detection time by 600% through more optimized distributed and parallel systems on a NSF/NASA funded project",
+          "Pioneered and deployed a Flask interface to scan over 650,000 malicious URLs in Linux environments",
+          "Led a four-person engineering team and coordinated Agile sprints to deliver production-ready software"
         ]
       },
       {
-        title: "ML Research Intern",
-        company: "GRAIT-DM Lab (Georgia Tech)",
-        logo: "/Pictures/GT.svg", // Updated to use GT_Computing.svg for GRAIT-DM
-        period: "May 2022 - August 2022",
-        description: "Assisted Ph.D. researchers in NLP by running large-scale text classification experiments for fake news detection and streamlining model debugging through parameterized testing.",
-        techStack: ["Python", "scikit-learn", "Pandas", "NLP", "Machine Learning"],
+        title: "Software Engineer Intern",
+        company: "Kavi Media",
+        logo: "/Pictures/KaviMedia.svg",
+        period: "June 2024 - August 2024",
+        description: "Built scalable backend pipelines and user-facing mobile features to deliver personalized audio content recommendations.",
+        techStack: ["React Native", "JavaScript", "MariaDB", "ElasticSearch", "Gorse", "Node.js"],
         achievements: [
-          "Conducted 15+ text-classification experiments for fake-news detection on data from social media platforms like X, Instagram, and other News outlets",
-          "Collaborated with Ph.D. candidates on NLP research with the NELA-GT project, monitoring and reporting model errors from parameterized tests that exceeded 10,000 epochs, ultimately reducing debugging times"
+          "Developed a scalable data ingestion system to process 50k+ multimedia items into NoSQL MariaDB and ElasticSearch",
+          "Designed UI for Podcast screens on an audio app deployed for beta-testing using React Native and JavaScript",
+          "Leveraged Gorse for machine-learning–driven content recommendations enhancing click through rate by 1.5x"
+        ]
+      },
+      {
+        title: "Software Development Intern",
+        company: "EdnaML Research Lab @Georgia Tech",
+        logo: "/Pictures/GT.svg",
+        period: "June 2023 - August 2023",
+        description: "Collaborated with Ph.D. researchers on NLP experiments for fake-news detection on Twitter.",
+        techStack: ["Python", "Google Colab", "Docker", "Git", "PyTorch", "TensorFlow", "NLP"],
+        achievements: [
+          "Reproduced 15+ ML workflows in Python using Google Colab, Docker, and Git for fake-news detection on Twitter",
+          "Collaborated with Ph.D. researchers on NLP experiments, leveraging PyTorch & TensorFlow to monitor and report model errors from 10k+ epoch parameterized tests, reducing debugging times significantly"
         ]
       }
     ]
@@ -77,69 +91,53 @@ export const sections = [
     cta: "See portfolio",
     content: [
       {
-        title: "GiftSpark",
-        period: "February 2025 - Present",
-        sneakPeek: "AI-powered B2B gift recommendations for 10k+ employees using AWS APIs",
-        description: "An AI-powered gift recommendation platform that helps HR teams find perfect gifts for their employees based on their preferences and occasion.",
-        images: ["/Pictures/GS_Dashboard.png"], // Array of project images
+        title: "RefNet",
+        period: "September 2025",
+        sneakPeek: "Won 2nd place Best Overall Project at HackGT12 - AI assistant for literature reviews",
+        description: "An AI-powered literature review assistant that analyzes academic papers and creates interactive citation graphs. Won 2nd place Best Overall Project at HackGT12 against 900+ competitors.",
+        images: ["/Pictures/RefNet.png"],
         links: {
-          live: "https://giftspark.net",
+          live: "https://refnet.wiki",
         },
-        techStack: ["React", "Node.js", "MongoDB", "TypeScript", "Tailwind CSS", "AWS PA API", "OpenAI API", "Google OAuth2.0"],
+        techStack: ["Docker", "AWS EC2", "Python", "React", "Flask", "D3.js", "REST API", "Node.js", "GPT-4o", "CedarOS"],
         achievements: [
-          "A B2B AI gift recommendation software using openAI and AWS’s PA API to generate gifts for 10k+ employees",
-          "Built a user-friendly Next.js, TailwindCSS, and React.js professional frontend and integrated Postmark for SMTP features used by 120+ beta testers",
-          "Engineered a full Autobuy pipeline with business access using Google OAuth 2.0 and MongoDB for user data"
+          "Won 2nd place Best Overall Project at HackGT against 900+ competitors for an AI assistant for literature reviews",
+          "Deployed React frontend with dockerized Flask/Python backend hosted on AWS EC2 instances for scalability",
+          "Built interactive D3.js graph visualizations to analyze 200M+ academic papers with citation and depth control feature",
+          "Integrated GPT-4o via CedarOS to directly manipulate the React frontend by highlighting graph nodes and inserting papers by interacting with a draggable chat on a whiteboard-like interface"
         ]
       },
       {
         title: "DJMoody", 
-        period: "May 2025 - June 2025",
-        sneakPeek: "AI-powered music energy classifier with 85%+ accuracy and intelligent crossfade detection for seamless DJ transitions",
+        period: "June 2025",
+        sneakPeek: "AI-powered music energy classifier with 85%+ accuracy and intelligent crossfade detection",
         description: "An intelligent DJ assistant that uses PyTorch neural networks to classify music energy levels and automatically detect optimal crossfade points for transitions between tracks.",
         images: ["/Pictures/DJMoody_Dash.png"],
         links: {
           github: "https://github.com/Shreyas765/DJMoody",
           live: "https://dj-moody.vercel.app",
         },
-        techStack: ["PyTorch","Scikit-learn", "Neural Networks", "Next.Js", "TailWindCSS", "Librosa"],
+        techStack: ["PyTorch", "Next.js", "React", "TailwindCSS", "Librosa", "GitHub Actions", "CI/CD"],
         achievements: [
-          "Developed a PyTorch-based neural network achieving 85%+ validation accuracy for music energy classification across 3 categories using 75+ audio samples, with end-to-end data collection and training pipeline",
-          "Implemented optimal crossfade point detection using beat analysis and energy matching for 30-second transitions",
-          "Designed and deployed a Next.js + TailwindCSS web application, ensuring integration of model outputs with a dynamic UI"
+          "Trained a PyTorch-based neural network with 85%+ accuracy to detect audio energy levels on 3 clusters",
+          "Implemented beat alignment and energy matching algorithms to create smooth 30-second transitions with Librosa",
+          "Deployed a Next.js and TailwindCSS web app with CI/CD pipelines using GitHub Actions"
         ]
       },
-    ]
-  },
-  { 
-    id: "accolades", 
-    title: "Accolades", 
-    cta: "Awards",
-    content: [
       {
-        title: "American Invitational Mathematics Examination (AIME) Invitee (Top 2.5% of 200,000+)",
-        period: "2023",
-        description: "Mathematical Association of America (MAA)"
-      },
-      {
-        title: "1st Place Website Design at State| National Qualifier",
-        period: "2023",
-        description: "Future Business Leaders of America (FBLA)"
-      },
-      {
-        title: "Governor's Honors Program Mathematics Finalist (1 of 70 from all of Georgia)",
-        period: "2023",
-        description: "Georgia Governor's Office of Student Achievement"
-      },
-      {
-        title: "Harvard Debate Octofinalists (top 3.5% of 500+)",
-        period: "2023",
-        description: "Harvard Debate Council"
-      },
-      {
-        title: "FTC Deans List Semifinalist",
-        period: "2022",
-        description: "FIRST Robotics"
+        title: "Space Debris Collection",
+        period: "April 2025",
+        sneakPeek: "Gameboy Advance game built in C with Docker containerization",
+        description: "A GBA game built in C lang using DMA, Mode 3 graphics, and hardware interrupts to simulate asteroids & debris collection gameplay.",
+        images: ["/Pictures/GBA.png"],
+        links: {
+          github: "https://github.com/Shreyas765/Space-Debris-Collection",
+        },
+        techStack: ["C", "Docker", "GBA Development", "DMA", "Hardware Interrupts"],
+        achievements: [
+          "Built a GBA game in C lang using DMA, Mode 3 graphics, and hardware interrupts to simulate asteroids & debris",
+          "Containerized the Gameboy Advanced toolchain with Docker, ensuring cross-compilation and reproducible builds"
+        ]
       }
     ]
   },
@@ -152,16 +150,84 @@ export const sections = [
         title: "Georgia Institute of Technology",
         logo: "/Pictures/GT.svg",
         period: "Expected May 2027",
-        description: "B.S. in Computer Science",
+        description: "BSMS in Computer Science",
         achievements: [
-          "**Concentration:** Intelligence / Information and Internetworks",
-          "**GPA:** 3.88/4.0",
-          "**Relevant Coursework:** Data Structures & Algorithms, AI, Databases, OOP, Machine Learning, Systems & Networks",
-          "**Honors:** Faculty Honors / Dean's List x2"
+          "Relevant Coursework: Data Structures & Algorithms, Artificial Intelligence, Machine Learning, Databases, Java OOP, Systems & Networks"
         ]
       },
+    ]
+  },
+  { 
+    id: "skills", 
+    title: "Skills", 
+    cta: "Technical Skills",
+    content: {
+      languages: [
+        { name: "Python", icon: "/Pictures/python-5.svg" },
+        { name: "Java", icon: "/Pictures/java.svg" },
+        { name: "C", icon: "/Pictures/c.svg" },
+        { name: "JavaScript", icon: "/Pictures/react-2.svg" },
+        { name: "TypeScript", icon: "/Pictures/next-js.svg" },
+      ],
+      frameworks: [
+        { name: "React", icon: "/Pictures/react-2.svg" },
+        { name: "Next.js", icon: "/Pictures/next-js.svg" },
+        { name: "TailwindCSS", icon: "/Pictures/tailwind-css-2.svg" },
+        { name: "MongoDB", icon: "/Pictures/mongodb-icon-1.svg" },
+        { name: "PostgreSQL", icon: "/Pictures/postgresql.svg" },
+        { name: "PyTorch", icon: "/Pictures/pytorch-2.svg" },
+      ],
+      tools: [
+        { name: "Docker", icon: "/Pictures/docker.svg" },
+        { name: "AWS", icon: "/Pictures/aws-2.svg" },
+        { name: "Git", icon: "/Pictures/git-icon.svg" },
+        { name: "Google Cloud", icon: "/Pictures/google_cloud.svg" },
+      ]
+    }
+  },
+  { 
+    id: "awards", 
+    title: "Awards", 
+    cta: "Recognition",
+    content: [
+      {
+        title: "2nd Best Overall Project - HackGT12",
+        period: "2025",
+        organization: "HackGT",
+        description: "Awarded 2nd place out of 900+ competitors for RefNet, an AI-powered literature review assistant"
+      },
+      {
+        title: "American Invitational Mathematics Examination (AIME) Qualifier",
+        period: "2023",
+        organization: "Mathematical Association of America (MAA)",
+        description: "Top 2.5% of 200,000+ participants nationwide"
+      },
+      {
+        title: "Governor's Honors Program Mathematics Finalist",
+        period: "2023",
+        organization: "Georgia Governor's Office of Student Achievement",
+        description: "Selected as 1 of 70 math finalists from all of Georgia"
+      },
+      {
+        title: "1st Place Website Design at State Competition",
+        period: "2023",
+        organization: "Future Business Leaders of America (FBLA)",
+        description: "State champion and National Qualifier"
+      },
+      {
+        title: "Harvard Debate Octofinalists",
+        period: "2023",
+        organization: "Harvard Debate Council",
+        description: "Top 3.5% of 500+ competitors"
+      },
+      {
+        title: "FTC Dean's List Semifinalist",
+        period: "2022",
+        organization: "FIRST Robotics",
+        description: "Recognized for leadership and technical excellence in robotics"
+      }
     ]
   }
 ] 
 
-export const sectionIds = sections.map(section => section.id) 
+export const sectionIds = sections.map(section => section.id)
