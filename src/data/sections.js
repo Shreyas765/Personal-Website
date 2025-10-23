@@ -7,7 +7,7 @@ export const sections = [
     cta: "Learn more",
     content: {
       bio: "Hey, I'm Shreyas! I'm a Computer Science student at Georgia Tech passionate about building impactful software solutions and AI powered applications.",
-      interests: ["Software Engineering", "Machine Learning Engineering", "Distributed Systems", "AI Research"],
+      interests: ["Software Engineering", "Production Engineering", "Distributed Systems", "AI/ML Research"],
       currentFocus: "Currently working on protein structure analysis using deep learning at ARTISAN Research Lab"
     }
   },
