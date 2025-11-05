@@ -110,7 +110,7 @@ function App() {
             <div className="bg-gradient-to-br from-blue-950 via-blue-900 to-black border border-blue-800 rounded-2xl p-6 shadow-2xl shadow-blue-900/50 backdrop-blur-sm">
               <div className="text-center mb-4">
                 <img 
-                  src="/Pictures/ShreyasArisa.png" 
+                  src="/Pictures/shreyasarisa2.png" 
                   alt="Shreyas Arisa"
                   className="w-58 h-58 rounded-xl mx-auto mb-4 border-4 border-blue-500 shadow-xl shadow-blue-500/50 object-cover"
                   style={{ scale: '1.05', objectPosition: 'center 20%' }}
@@ -199,7 +199,7 @@ function App() {
       <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-blue-900">
         <div className="p-4 flex items-center space-x-4">
           <img 
-            src="/Pictures/ShreyasArisa.png" 
+            src="/Pictures/shreyasarisa2.png" 
             alt="Shreyas Arisa"
             className="w-12 h-12 rounded-full border-2 border-blue-500 object-cover"
             style={{ objectPosition: 'center 20%' }}
