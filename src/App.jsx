@@ -173,7 +173,7 @@ function App() {
                     <Linkedin size={22} />
                   </a>
                   <a 
-                    href="mailto:sarisa3@gatech.edu"
+                    href="mailto:varisa3@gatech.edu"
                     className="p-3 bg-blue-900/50 hover:bg-blue-600 rounded-lg text-blue-200 hover:text-white transition-all hover:scale-110 transform hover:shadow-lg hover:shadow-blue-600/50"
                   >
                     <Mail size={22} />

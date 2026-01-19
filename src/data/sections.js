@@ -18,6 +18,17 @@ export const sections = [
     cta: "View timeline",
     content: [
       {
+        title: "Software Engineer Intern",
+        company: "Narb Technology",
+        logo: "/Pictures/narbtechnology_logo.svg",
+        period: "January 2026 - Present",
+        description: "",
+        techStack: [],
+        achievements: [
+          
+        ]
+      },
+      {
         title: "ML Engineer - Undergraduate",
         company: "ARTISAN Research Lab @Georgia Tech",
         logo: "/Pictures/GT_Computing.svg",
