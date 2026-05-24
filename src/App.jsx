@@ -412,6 +412,17 @@ function App() {
                                 <span>Demo</span>
                               </a>
                             )}
+                            {project.links.devpost && (
+                              <a 
+                                href={project.links.devpost}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center space-x-1.5 text-blue-400 hover:text-blue-300 transition-colors text-xs hover:underline"
+                              >
+                                <ExternalLink size={14} />
+                                <span>Devpost</span>
+                              </a>
+                            )}
                           </div>
                         )}
                       </div>

@@ -19,11 +19,22 @@ export const sections = [
     content: [
       {
         title: "Software Engineer Intern",
-        company: "Narb Technology",
+        company: "Sonatype",
+        logo: "/Pictures/sonatype.svg",
+        period: "May 2026 - August 2026",
+        description: "Add your description here",
+        techStack: ["Add", "Your", "Tech", "Stack"],
+        achievements: [
+          
+        ]
+      },
+      {
+        title: "Software Engineer Intern",
+        company: "NARB Technology",
         logo: "/Pictures/narbtechnology_logo.svg",
-        period: "January 2026 - Present",
-        description: "",
-        techStack: [],
+        period: "January 2026 - April 2026",
+        description: "Add your description here",
+        techStack: ["Add", "Your", "Tech", "Stack"],
         achievements: [
           
         ]
@@ -109,6 +120,7 @@ export const sections = [
         images: ["/Pictures/RefNet.png"],
         links: {
           live: "https://refnet.wiki",
+          devpost: "https://devpost.com/software/refnet-c04g9n"
         },
         techStack: ["Docker", "AWS EC2", "Python", "React", "Flask", "D3.js", "REST API", "Node.js", "GPT-4o", "CedarOS"],
         achievements: [
